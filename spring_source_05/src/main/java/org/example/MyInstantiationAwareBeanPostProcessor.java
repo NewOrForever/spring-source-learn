@@ -47,7 +47,7 @@ public class MyInstantiationAwareBeanPostProcessor implements InstantiationAware
 
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
-        // 处理@Autowired、@Resource、@Value
+        // 处理@Autowired、@Resource、@Value、@Inject
         return null;
     }
 

@@ -3,7 +3,8 @@ package org.example;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Hello world!
+ * bean销毁
+ * 依赖注入
  *
  */
 public class App 
@@ -11,7 +12,7 @@ public class App
     public static void main( String[] args )
     {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        //context.registerShutdownHook();
+//        context.registerShutdownHook();
 
         /**
          * bean的销毁
@@ -48,15 +49,17 @@ public class App
          *      1. autowire：bytype、byname（属性需要有set方法）
          *          - 什么样的属性能进行自动注入？
          *              1.该属性有对应的set方法
-         * 		    2.没有在ignoredDependencyTypes中
-         * 		    3.如果该属性对应的set方法是实现的某个接口中所定义的，那么接口没有在ignoredDependencyInterfaces中
-         * 		    4.属性类型不是简单类型，比如int、Integer、int[]
-         * 		    5.setxxx -> pd.getName() ---> xxx, pvs不包含xxx，这种情况也不叫不能属性注入，这是在merged拓展点手动注入的
+         * 		        2.没有在ignoredDependencyTypes中
+         * 		        3.如果该属性对应的set方法是实现的某个接口中所定义的，那么接口没有在ignoredDependencyInterfaces中
+         * 		        4.属性类型不是简单类型，比如int、Integer、int[]
+         * 		        5.setxxx -> pd.getName() ---> xxx, pvs不包含xxx，这种情况也不叫不能属性注入，这是在merged拓展点手动注入的
          *          - bytype：根据set方法的参数类型来找bean，找到后传入set方法中
          *              1. 设置方法名称为setOrderService123(OrderService orderService)，能找到bean（根据参数类型OrderService来找bean）
          *              2. set方法有多个参数是不能自动注入的
          *                  能被PropertyDescriptor识别：set方法的定义是：方法参数个数为1个，并且 （方法名字以"set"开头并且方法返回类型为void）
          *          - byname：是根据set方法名（如：setOrderService，则会根据orderService，setOrderService123则会根据orderService123）作为beanName找bean
+         *          - autowire方式注入最后都会加入到pvs中去，就算最后通过@Autowired又去注入了，最终注入的属性还是autowire这里的，因为属性注入最后
+         *          还有个适配拿的是pvs
          *      2. @Autowired注解
          *          - 注解位置
          *              1. 属性上：先根据属性类型去找Bean，如果找到多个再根据属性名确定一个

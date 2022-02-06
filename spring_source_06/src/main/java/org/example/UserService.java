@@ -23,7 +23,7 @@ public class UserService {//implements UserServiceInterface<OrderService> {
     private User user;
     private Order order;
 
-    // 方法参数有两个，PropertyDescriptor识别不了
+    // 方法参数有两个，PropertyDescriptor识别不了(autowire下就识别不了)
     @Autowired
     public void setxxx(User user, Order order){
         this.user = user;

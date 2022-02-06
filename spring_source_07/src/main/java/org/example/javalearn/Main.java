@@ -28,7 +28,7 @@ public class Main {
             Method method = MyUserService.class.getMethod("test", String.class);
             Parameter[] parameters = method.getParameters();
             for (Parameter parameter : parameters) {
-                // jdk做不多获取参数的方法名
+                // jdk做不到获取参数的方法名
                 // 但是jdk1.8版本开始,可以配置编译参数来保留参数名，为反射提供便利
                 /**
                  * mavan中配置编译参数

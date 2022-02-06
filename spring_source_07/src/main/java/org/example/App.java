@@ -3,8 +3,10 @@ package org.example;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
- * Hello world!
+ * 依赖注入
  *
  */
 public class App
@@ -123,8 +125,8 @@ public class App
         /**
          * @Resource注入点
          *  1. merged节点找到bean的所有resource注入点，并缓存
-         *      - 当@Resource注解name属性不设置，则默认取filed的name，Method的setXxx ---> xxx
-         *      - 当@Resource注解type属性不设置，则默认是Object，源码中当是Object的时候会转成Field或Metho第一个参数的类型
+         *      - 当@Resource注解name属性不设置，则默认取field的name，Method的setXxx ---> xxx
+         *      - 当@Resource注解type属性不设置，则默认是Object，源码中当是Object的时候会转成Field或Method第一个参数的类型
          *  2. postProcessProperties给bean注入属性时
          *      - 假设@Resource中没有指定name，并且field的name或setXxx()的xxx不存在对应的bean，那么则根据field类型或方法参数类型
          *      从BeanFactory去找（就是和@Autowired注入一样，根据类型去找bean）

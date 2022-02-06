@@ -13,6 +13,7 @@ public class App
     public static void main( String[] args )
     {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
         /**
          * 当UserService是singleton的时候，UserService是在初始化容器的时候就已经创建好了单例bean
          * 所以context.GetBean方法就是从singletonObjects中获取了单例bean，不用再去创建bean了，也就是
@@ -25,19 +26,21 @@ public class App
 //        userService3.test();
 
         /**
-         *          别名存储数据格式
+         *          别名存储数据格式：第一个默认是beanName，其他是别名
          *         @Bean({"userservice", "userservice1", "userservice2"})
          *                 map<"userservice1", "userservice">
          *                 map<"userservice2", "userservice">
          *          transformedBeanName
          *          最后得到的beanName还是userService
+         *          也可能的存储：map<"userService1", "userService2">,map<"userService2", "userService">
+         *          所以源码中使用的是循环
          *
          */
 //        User user = (User) context.getBean("user1");
 //        user.test();
 
         /**
-         *   isdependent(beanname,dep)  beanname是不是呗dep依赖了
+         *   isdependent(beanname,dep)  beanname是不是被dep依赖了
          *   dependentBeanMap：某个bean被哪些bean依赖了
          *   dependenciesForBeanMap：某个bean依赖了哪些bean
          *   当UserService依赖了OrderService的同时OrderService依赖了UserService时就会进入循环依赖
@@ -61,7 +64,7 @@ public class App
          *  2. 线程中类加载器为null的情况下，返回ClassUtils类的类加载器
          *  3. 如果ClassUtils类的类加载器为空，那么则表示是Bootstrap类加载器加载的ClassUtils类，那么则返回系统类加载器
          *         context.getBeanFactory().setBeanClassLoader(customclassloader);
-         *         Thread.currentThread().setContextClassLoader(线程设置的classloader);    // tomcat也是使用这个方法来这是类加载器的
+         *         Thread.currentThread().setContextClassLoader(线程设置的classloader);    // tomcat也是使用这个方法来设置类加载器的
          *         Thread.currentThread().getContextClassLoader();
          *         ClassLoader cl = ClassUtils.class.getClassLoader();
          *         if (cl == null) {
@@ -90,6 +93,8 @@ public class App
          * byname：获取bean所有的set方法，比如setOrderService，取orderService去找bean，找到就注入set方法
           */
         User user = (User) context.getBean("user");
+        // registerSingleton不会去创建一个beandefiniton到bedefinitionmap中去
+//        context.getBeanFactory().registerSingleton("user001", user);
         user.test();
 
         /**
