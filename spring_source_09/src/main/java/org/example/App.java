@@ -111,13 +111,11 @@ public class App
 //        beanDefinition.setAutowireMode(AUTOWIRE_CONSTRUCTOR);
         context.registerBeanDefinition("userService", beanDefinition);*/
 
-
 //        UserService userService = (UserService)context.getBean("userService", new OrderService());
         UserService userService = (UserService)context.getBean("userService");
 //        UserService userService2 = (UserService)context.getBean("userService");
         System.out.println(userService);
         userService.test();
-
 
         /**
          *
