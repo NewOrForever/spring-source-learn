@@ -81,45 +81,7 @@ public class App
          * 了解mybatis-spring源码怎么写的？
          */
 
-        /**
-         * Aop的一些概念
-         *  - ProxyFactory封装jdk及cglib动态代理
-         *   1. spring复制了一个版本的cglib代码进来
-         *      - cglib使用
-         *          - 需要设置superClass
-         *          - methodProxy.invoke  /  method.invok   /   methodProxy.invokeSuper(o, objects)
-         *          - o是代理对象
-         *          - 不同方法对应不同代理逻辑
-         *              1. Callback设置多个 - NoOp.Instance啥都不做的拦截器
-         *              2. setCallbackFilter，返回的数字就是上面Callback数组的下标（根据方法名来返回不同的下标）
-         *   2. jdk动态代理
-         *      - 被代理类需要实现一个接口
-         *      - 返回的是接口的类型
-         *  3. ProxyFactory使用
-         *      - setTarget, setInterfaces(返回的是jdk动态代理对象)
-         *      - addAdvice（before、after、around、throwing）
-         *       - method.invoke不需要了
-         *       - MethodInteceptor.invoke(invocation) ---> before ---> invovation.proceed()
-         *          around如果invocation.proceed()没有写，那么在around后面添加的MethodInteceptor就不会进去了
-         *       - 如何设置不同方法不同的代理逻辑
-         *          addAdviser(PointcutAdvisor)
-         *              - getAdvice()返回MethodInteceptor
-         *              - getPointcut(）return StaticMethodMatcherPoingcut()
-         *              - adviser实际就是advice + pointcut
-         *   4. ProxyFactory在spring中使用
-         *       - @Bean ProxyFactoryBean
-         *       - 如何自动让UserService生成的代理对象的代理逻辑自动的绑定某个MethodInteceptor?
-         *          1. @Bean BeanNameAutoProxyCreator：实际是个BeanPostProcessor，在实例化前操作符合设置的规则的
-         *              setBeanNames("userSe*")：符合这样的beanname设置代理逻辑
-         *              setInterceptorNames("myBeforeAdvice")
-         *          2. @Bean DefaultAdvisorAutoProxyCreator （或者@Import）是个BeanPostProcessor 初始化后方法中找到所有Advisor的bean匹配当前被代理的bean（UserService）判断UserService中是否满足Pointcut指定的匹配规则
-         *              @Bean DefaultPointAdvisor设置切面和代理逻辑
-         *
-         *  - AspectJ编译
-         *  - spring把Aspectj的代码直接复制过来用
-         *
-         *
-         */
+
 
 
     }
