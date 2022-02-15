@@ -38,7 +38,9 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
         // @MyMapperScanner注解
         Map<String, Object> annotationAttributes = importingClassMetadata.getAnnotationAttributes(MyMapperScan.class.getName());
         String[] basePackages = (String[]) annotationAttributes.get("value");
-
+//        AnnotationAttributes annotationAttr =
+//                AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(MyMapperScan.class.getName()));
+//        String[] basePackages = annotationAttr.getStringArray("value");
         // scan mapper
         MyClassPathBeanDefinitionScanner myScanner = new MyClassPathBeanDefinitionScanner(registry);
         // 这样UserMapper就不需要加@Component注解了

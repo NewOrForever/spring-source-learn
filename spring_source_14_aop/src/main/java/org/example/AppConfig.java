@@ -2,9 +2,12 @@ package org.example;
 
 import org.example.advisor.MyAdvisor;
 import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 /**
  * ClassName:AppConfig
@@ -20,10 +23,9 @@ public class AppConfig {
 
     @Bean
     public MyAdvisor myAdvisor() {
-        new ProxyFactoryBean().seti
         return new MyAdvisor();
-
-
     }
+
+
 
 }

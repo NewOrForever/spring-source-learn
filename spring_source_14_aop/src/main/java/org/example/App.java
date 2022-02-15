@@ -11,6 +11,7 @@ import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.cglib.proxy.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.lang.reflect.Method;
 
@@ -22,6 +23,7 @@ public class App
 {
     public static void main( String[] args )
     {
+
         /**
          *  - ProxyFactory.getProxy()源码阅读
          * 	 jdk or cglib?
