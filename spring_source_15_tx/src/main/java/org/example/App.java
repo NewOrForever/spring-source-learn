@@ -43,6 +43,8 @@ public class App
          *      传播机制测试
          *      MethodCache（Method, hashcode）, MethodClassCache（Method, Class）
          *          - 涉及到equals，hashcode，Map中的比较
+         *      when we should create a transaction?
+         *      savepoint 在哪里create
          *
          * @EnableTransactionManagement
          *  - Proxy
