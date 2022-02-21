@@ -9,6 +9,7 @@ package org.example.aspectj;
  * @Author:qs@1.com
  */
 public class IntroduceUserImpl implements IntroduceUserInterface {
+
     @Override
     public void intoduceUserExecute() {
         System.out.println("IntroduceUserImpl#intoduceUserExecute");

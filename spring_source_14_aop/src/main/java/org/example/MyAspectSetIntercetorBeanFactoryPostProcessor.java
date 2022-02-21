@@ -13,6 +13,10 @@ import org.springframework.util.ClassUtils;
 
 import static org.springframework.aop.config.AopConfigUtils.AUTO_PROXY_CREATOR_BEAN_NAME;
 
+
+/**
+ * 建一个BeanFactoryPostProcessor在启动的时候给引入的aop的那个beandefinition添加一个属性
+ */
 @Component
 public class MyAspectSetIntercetorBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
@@ -22,7 +26,7 @@ public class MyAspectSetIntercetorBeanFactoryPostProcessor implements BeanFactor
             BeanDefinition beanDefinition = beanFactory.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
             if (AnnotationAwareAspectJAutoProxyCreator.class.getName() == beanDefinition.getBeanClassName()) {
                 // 开启了aop
-                // 设置interceptorNames
+                // 设置interceptorNames（advice的beanName）
                 beanDefinition.getPropertyValues().addPropertyValue("interceptorNames", "myBeforeAdvice");
             }
         }

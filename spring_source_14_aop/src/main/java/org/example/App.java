@@ -24,6 +24,12 @@ public class App
     public static void main( String[] args )
     {
 
+//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+//        UserServiceInterface userService = (UserServiceInterface) context.getBean("userService");
+//        userService.execute(); // 两次拦截到的Method相同
+//        userService.execute();
+
+
         /**
          *  - ProxyFactory.getProxy()源码阅读
          * 	 jdk or cglib?
@@ -53,13 +59,6 @@ public class App
         UserService proxy = (UserService) proxyFactory.getProxy();
         proxy.execute();
 
-
-        /**
-         * 小的基础知识点：
-         *  实例化子类的有参构造方法时，会不会先去调父类构造方法?
-         *  还是会先去调用父类的无参构造方法的，父类没有无参构造方法的话会报错的(编译器就过不了)
-         *  子类构造方法第一行默认有个super()只不过被省略了而已
-         */
 
         /**
          * 源码阅读没理解的点：

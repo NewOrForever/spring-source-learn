@@ -23,6 +23,7 @@
         <module>spring_source_12_mybatis</module>
         <module>spring_source_13_aop</module>
         <module>spring_source_14_aop</module>
+        <module>spring_source_15_tx</module>
     </modules>
 
     <properties>

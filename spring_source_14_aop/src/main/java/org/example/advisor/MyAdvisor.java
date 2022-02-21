@@ -7,6 +7,7 @@ import org.springframework.aop.ClassFilter;
 import org.springframework.aop.MethodMatcher;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -18,6 +19,7 @@ import java.lang.reflect.Method;
  * @Date:2022/2/15 8:17
  * @Author:qs@1.com
  */
+@Component
 public class MyAdvisor implements PointcutAdvisor {
     @Override
     public Pointcut getPointcut() {

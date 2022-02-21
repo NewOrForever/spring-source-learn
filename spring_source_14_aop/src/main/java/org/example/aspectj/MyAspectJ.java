@@ -18,9 +18,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyAspectJ {
 
-        // 为已有的类引入一个新的接口，也可以理解为把当前对象转型为另一个对象
+        // 为已有的类引入一个新的接口
         // value -  target type
         // defaultImpl - 新接口的实现类（最后执行方法的类）
+        // 使用时先将拿到的MyAspectjUser对象强转成接口类型再去调用接口的方法
         @DeclareParents(value = "org.example.aspectj.MyAspectjUser", defaultImpl = IntroduceUserImpl.class)
         private IntroduceUserInterface introduceUserInterface;
 
