@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.transactionSynchronization.MyTransactionSynchronization;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.support.StaticMethodMatcher;
 import org.springframework.aop.support.StaticMethodMatcherPointcut;
@@ -7,6 +8,7 @@ import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.lang.reflect.Method;
@@ -29,8 +31,11 @@ public class App
 //        Set<String> strings = strThreadLocal.get();
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        UserService userService = (UserService) context.getBean("userService");
-        userService.test();
+        OrderService orderService = (OrderService) context.getBean("orderService");
+        orderService.test();
+
+
+
 
 
 
@@ -38,8 +43,6 @@ public class App
         /**
          *
          * TODO
-         *      spring_source_14_aop调试跑一遍：initBeanFactory，isEligibleAdvisorBean
-         *      - importaware  <-  ImportAwareBeanpostProcessor    finished
          *      传播机制测试
          *      MethodCache（Method, hashcode）, MethodClassCache（Method, Class）
          *          - 涉及到equals，hashcode，Map中的比较

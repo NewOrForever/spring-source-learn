@@ -46,7 +46,8 @@ public class AppConfig {
     public PlatformTransactionManager transactionManager() {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(dataSource());
-//        transactionManager.setGlobalRollbackOnParticipationFailure(true);
+        // 部分失败全局不回滚 - 会提交
+        transactionManager.setGlobalRollbackOnParticipationFailure(false);
         return transactionManager;
     }
 
