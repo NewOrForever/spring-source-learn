@@ -1,6 +1,7 @@
 package org.example.xml.controller;
 
 import org.example.pojo.User;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/request")
-public class RequestMappingController {
+public class RequestMappingController implements InitializingBean {
 
     @RequestMapping("/mapping")
     public ModelAndView mapping() {
@@ -71,5 +72,8 @@ public class RequestMappingController {
     }
 
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
 
+    }
 }

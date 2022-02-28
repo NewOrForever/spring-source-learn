@@ -23,7 +23,6 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
  
  
