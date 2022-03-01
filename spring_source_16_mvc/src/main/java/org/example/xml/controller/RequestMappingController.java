@@ -1,12 +1,15 @@
 package org.example.xml.controller;
 
 import org.example.pojo.User;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +26,9 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/request")
-public class RequestMappingController {//extends AbstractController {
+public class RequestMappingController implements ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
 
     @RequestMapping("/mapping")
     public ModelAndView mapping() {
@@ -72,12 +77,8 @@ public class RequestMappingController {//extends AbstractController {
     }
 
 
-//    public RequestMappingController() {
-//        super.setRequireSession(true);
-//    }
-//
-//    @Override
-//    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        return null;
-//    }
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

@@ -23,7 +23,6 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
  
  
@@ -39,6 +38,8 @@
      <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
  -->
 
+<!--    其实这个MappingJackson2HttpMessageConverter不需要去配置-->
+<!--    RequestMappingHandlerAdapter中会去判断有没有com.fasterxml.jackson.databind.ObjectMapper，有的话加载-->
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
