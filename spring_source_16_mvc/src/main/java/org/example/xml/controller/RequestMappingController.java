@@ -1,11 +1,15 @@
 package org.example.xml.controller;
 
 import org.example.pojo.User;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -23,10 +27,13 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/request")
-public class RequestMappingController implements InitializingBean {
+public class RequestMappingController implements ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
 
     @RequestMapping("/mapping")
     public ModelAndView mapping() {
+
         System.out.println("this is requestMappingController");
 
         ModelAndView modelAndView = new ModelAndView();
@@ -73,7 +80,7 @@ public class RequestMappingController implements InitializingBean {
 
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }
