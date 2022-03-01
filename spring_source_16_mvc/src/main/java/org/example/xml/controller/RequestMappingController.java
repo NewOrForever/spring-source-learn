@@ -6,6 +6,7 @@ import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/request")
-public class RequestMappingController {
+public class RequestMappingController {//extends AbstractController {
 
     @RequestMapping("/mapping")
     public ModelAndView mapping() {
@@ -71,5 +72,12 @@ public class RequestMappingController {
     }
 
 
-
+//    public RequestMappingController() {
+//        super.setRequireSession(true);
+//    }
+//
+//    @Override
+//    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        return null;
+//    }
 }
