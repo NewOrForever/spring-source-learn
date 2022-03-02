@@ -5,14 +5,15 @@
          version="4.0">
 
   <!--spring 基于web应用的启动-->
-<!--  <listener>-->
-<!--    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-<!--  </listener>-->
-<!--&lt;!&ndash;  &lt;!&ndash;全局参数：spring配置文件&ndash;&gt;&ndash;&gt;-->
-<!--  <context-param>-->
-<!--    <param-name>contextConfigLocation</param-name>-->
-<!--    <param-value>classpath:spring-mvc.xml</param-value>-->
-<!--  </context-param>-->
+  <!--父容器，先启动-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+<!--  &lt;!&ndash;全局参数：spring配置文件&ndash;&gt;-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-core.xml</param-value>
+  </context-param>
 
 
   <!--配置前端控制器  、核心调度器

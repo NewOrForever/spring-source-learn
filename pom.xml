@@ -25,6 +25,8 @@
         <module>spring_source_14_aop</module>
         <module>spring_source_15_tx</module>
         <module>spring_source_16_mvc</module>
+        <module>spring_source_17_mvc</module>
+        <module>common_project</module>
     </modules>
 
     <properties>
@@ -161,6 +163,13 @@
     <build>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+
                 <!-- jdk版本插件 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

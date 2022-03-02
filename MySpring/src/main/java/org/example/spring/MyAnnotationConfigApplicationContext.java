@@ -1,8 +1,5 @@
 package org.example.spring;
 
-import com.sun.applet2.AppletParameters;
-import com.sun.deploy.util.StringUtils;
-
 import java.beans.Introspector;
 import java.io.File;
 import java.lang.reflect.Field;

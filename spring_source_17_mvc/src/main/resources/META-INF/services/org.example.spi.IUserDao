@@ -1,0 +1,2 @@
+org.example.spi.UserDaoImpl
+org.example.spi.SecondUserDaoImpl
