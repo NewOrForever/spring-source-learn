@@ -1,6 +1,8 @@
 package org.example.xml.controller;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.example.pojo.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +39,7 @@ public class RequestMappingController implements ApplicationContextAware {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("a");
         modelAndView.addObject("source", "requestMappingController");
-
+        
         return modelAndView;
     }
 
