@@ -1,8 +1,6 @@
 
 
 rootconfig implements ServletContextAware
-init DispatcherServlet的时候进入FrameworkServlet的initWebApplicitoncontext会拿到parent context设置进来
-finishrefresh会发布一个事件
 @EnableWebMvc
 加载拦截器啊啥的WebMvcConfigurer
 
@@ -73,6 +71,48 @@ public class MyWebApplicationInitializer extends AbstractAnnotationConfigDispatc
 }
 ```
 * 父子容器配置类，WebAppConfig可以实现WebMvcConfigurer来扩展配置
+
+
+
+
+
+
+## mybatis
+### jdbc
+DriverManager使用spi机制 -> 看mysql-connector-java的META-INF
+DriverManager的静态代码块loadInitialDrivers()方法执行ServiceLoader类的方法来加载驱动
+弊端：
+1.数据库配置、sql语句在代码中硬编码，维护性差
+xml
+2.频繁创建和关闭数据库连接，资源消耗大
+连接池
+3.没有缓存
+一二
+4.参数设置不方便，开发效率低
+xml动态配置<if>
+5.处理程序结果集、类型转换，开发效率低
+resultType、resultMap
+
+mybatis半自动的ORM  
+
+基础支撑层
+
+接口层SqlSession
+
+数据处理层
+
+源码版本修改一下
+
+SqlSessionFactory（构建sqlsessionfactory的过程就是解析xml的过程） 
+解析xml节点：
+全局：XmlConfigBuilder解析，settings、数据环境、类型处理器、别名解析器、插件...
+mapper.xml：XmlMappeBuilder解析，CRUD、resultMap...
+
+-》 SqlSession
+
+
+
+
 
 
 
