@@ -1,18 +1,5 @@
-## spring mvc启动原理
-web.xml中ContextLoaderListener（父）
-DispatcherServlet（子）
-父子容器，子容器可以访问父容器，父容器不能访问子容器
 
 
-不用xml方式，用javaconfig方式
-SPI（服务提供者接口）
-META-INF.services下添加一个接口限定名的文件，文件里写上实现类的全名 -> 执行实现类的onStartUp方法
-spring-web下web-inf -> 执行initaializer的onStartUp方法，ServletContext参数是tomcat提供进来的,@HandlesTypes导入的接口，spring会去找
-实现接口的所有类，然后传入另一个参数中 -> 非接口&&非抽象类去实例化添加到集合 -> 遍历集合，执行每个WebApplicationInitializer的onStartUp方法
--> CreateRootApplicationContext -> AnnotationCOnfigWebApplicationCOntext无参，先不refresh
-
-
-ContextLoaderListener
 rootconfig implements ServletContextAware
 init DispatcherServlet的时候进入FrameworkServlet的initWebApplicitoncontext会拿到parent context设置进来
 finishrefresh会发布一个事件
@@ -22,15 +9,6 @@ finishrefresh会发布一个事件
 
 
 思考：有必要加载两个容器吗？
-
-
-
-
-
-
-
-
-spring mvc父子容器
 
 
 
@@ -50,6 +28,13 @@ public class UserSpi {
 ```
 
 ### 注解方式启动
+* 启动大致流程
+```
+tomcat通过SPI机制去加载spring-web下WEB-INF/services中的SpringServletContainerInitializer类 -> 执行WebApplicationInitializer的onStartUp
+方法，ServletContext参数是tomcat提供进来的,@HandlesTypes导入的接口，spring会去找实现接口的所有类，然后传入另一个参数中
+-> 非接口&&非抽象类去实例化添加到集合 -> 遍历集合，执行每个WebApplicationInitializer的onStartUp方法 -> 所以我们要创建一个
+实现了WebApplicationInitializer的类（继承AbstractAnnotationConfigDispatcherServletInitializer这个抽象类就行了）
+```
 * web.xml不需要了，但是得要在pom中添加插件
 ```
 <plugin>
@@ -58,6 +43,36 @@ public class UserSpi {
     <version>3.3.1</version>
 </plugin>
 ```
-* 模仿spring的spi，spring-web下的spi文件
+* 创建启动器继承了WebApplication的子类AbstractAnnotationConfigDispatcherServletInitializer
+```
+public class MyWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    /**
+     * @return 前端控制器DispatcherServlet的拦截路径
+     */
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    /**
+     * @return 父容器的配置文件
+     */
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{RootConfig.class};
+    }
+
+    /**
+     * @return 子容器的配置文件
+     */
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebAppConfig.class};
+    }
+}
+```
+* 父子容器配置类，WebAppConfig可以实现WebMvcConfigurer来扩展配置
+
 
 
