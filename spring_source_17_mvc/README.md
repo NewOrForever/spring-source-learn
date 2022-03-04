@@ -105,8 +105,13 @@ mybatis半自动的ORM
 
 SqlSessionFactory（构建sqlsessionfactory的过程就是解析xml的过程） 
 解析xml节点：
-全局：XmlConfigBuilder解析，settings、数据环境、类型处理器、别名解析器、插件...
-mapper.xml：XmlMappeBuilder解析，CRUD、resultMap...
+全局：XmlConfigBuilder解析，settings、数据环境、类型处理器、别名解析器、插件（分页插件添加到InterceptorChain）... -> 封装到Configuration对象
+DefaultObjectFactory
+
+
+
+mapper.xml：XmlMappeBuilder解析，CRUD（MappedStatement）、resultMap...
+cache节点（二级缓存）
 
 -》 SqlSession
 
