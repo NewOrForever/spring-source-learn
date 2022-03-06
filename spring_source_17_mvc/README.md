@@ -111,9 +111,21 @@ DefaultObjectFactory
 
 
 mapper.xml：XmlMappeBuilder解析，CRUD（MappedStatement）、resultMap...
-cache节点（二级缓存）
+cache节点（二级缓存）：一层包一层
+
+解析sql -> sqlsource -> 执行sql语句 -> boundsql
+动态sql：select * from user where id=${id} -> select * from user where id = 1
+解析成一个个sqlnode，组合设计模式
+静态sql：select * from user where id=#{id} -> select * from user where id = ?
+
+注解方式
 
 -》 SqlSession
+
+1.mybatis以前的基础课，用法
+1.1下源码
+2.mybatis整合spring复习
+3.mybatis本节课学习 - 源码学习
 
 
 
