@@ -20,13 +20,13 @@ public class TestJdbc {
 
             // 2.创建连接
             // 使用了SPI机制，可以省略加载驱动这一步，在DriverManager的静态代码块中会去加载驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/myTestDB?characterEncoding=utf-8&useSSL=false", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/boot_user?characterEncoding=utf-8&useSSL=false", "root", "root");
 
             // 开启事务
             conn.setAutoCommit(false);
 
             // sql语句 参数#{}、${}、<if>
-            String sql = "select * from user where id = ?";
+            String sql = "select * from users where id = ?";
 
             // 获得sql执行者
             // 1.执行预处理、设置参数
@@ -42,9 +42,9 @@ public class TestJdbc {
             // 处理结果集
             User user = new User();
             user.setId(rs.getInt("id"));
-            user.setName(rs.getString("name"));
-            user.setSex(rs.getBoolean("sex"));
-            user.setBirthday(rs.getTimestamp("birthday"));
+            user.setUsername(rs.getString("username"));
+            user.setSex(rs.getInt("sex"));
+            user.setCreate_time(rs.getTimestamp("create_time"));
             System.out.println(user);
 
             conn.commit();

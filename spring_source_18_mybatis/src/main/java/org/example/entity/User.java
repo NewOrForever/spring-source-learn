@@ -5,10 +5,12 @@ import java.sql.Timestamp;
 
 public class User {
     private Integer id;
-    private String name;
-    private Integer age;
-    private Boolean sex;
-    private Timestamp birthday;
+    private String username;
+    private String password;
+    private int sex;
+    private int deleted;
+    private Timestamp create_time;
+    private Timestamp update_time;
 
     public Integer getId() {
         return id;
@@ -18,46 +20,64 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Boolean getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
-    public Timestamp getBirthday() {
-        return birthday;
+    public int getDeleted() {
+        return deleted;
     }
 
-    public void setBirthday(Timestamp birthday) {
-        this.birthday = birthday;
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+
+    public Timestamp getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Timestamp create_time) {
+        this.create_time = create_time;
+    }
+
+    public Timestamp getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Timestamp update_time) {
+        this.update_time = update_time;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", sex=" + sex +
-                ", birthday=" + birthday +
+                ", deleted=" + deleted +
+                ", create_time=" + create_time +
+                ", update_time=" + update_time +
                 '}';
     }
 }
