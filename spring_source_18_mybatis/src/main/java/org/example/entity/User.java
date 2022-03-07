@@ -1,9 +1,12 @@
 package org.example.entity;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -22790549095453473L;
+
     private Integer id;
     private String username;
     private String password;

@@ -1,3 +1,25 @@
+## Mybatis源码学习
+### jdbc的使用
+* 详细使用看TestJdbc
+* DriverManager使用的spi机制，可以省略加载驱动这一步骤
+```
+DriverManager使用spi机制 -> 看mysql-connector-java包下的的META-INF/services
+DriverManager的静态代码块loadInitialDrivers()方法执行ServiceLoader类的方法来加载驱动
+```
+* jdbc的弊端与mybatis的解决方案
+```
+弊端：
+1.数据库配置、sql语句在代码中硬编码，维护性差
+mybatsi.xml全局配置
+2.频繁创建和关闭数据库连接，资源消耗大
+连接池
+3.没有缓存
+一二
+4.参数设置不方便，开发效率低
+userMapper.xml动态配置<if>、<where>
+5.处理程序结果集、类型转换，开发效率低
+resultType、resultMap
+```
 
 
 
