@@ -72,4 +72,5 @@ cache节点（二级缓存）：一层包一层
 1.1下源码
 2.mybatis整合spring复习
 3.mybatis本节课学习 - 源码学习
+4.xml解析回顾
 

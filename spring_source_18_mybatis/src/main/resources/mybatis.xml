@@ -3,12 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!--properties 扫描属性文件.properties  -->
-    <properties resource="mybatis.properties"></properties>
+    <properties resource="mybatis.properties">
+    </properties>
 
 
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="LOG4J"/>
     </settings>
+
+<!--    <typeAliases>-->
+<!--        <typeAlias type="" alias="" />-->
+<!--        <package name=""/>-->
+<!--    </typeAliases>-->
 
 <!--    <plugins>-->
 <!--        <plugin interceptor="com.tuling.plugins.ExamplePlugin" ></plugin>-->
