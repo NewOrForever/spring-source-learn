@@ -3,7 +3,6 @@ package org.example;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.ibatis.io.Resources;
-import org.example.entity.User;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -44,7 +43,6 @@ public class AppTest {
         originList.add("a");
         originList.add("b");
         originList.add("c");
-
         /**
          * 用法：一个类维护了一个List属性（有get方法），拿到这个List后为了不让该list被修改只能是只读，所以让该get方法里面返回的是只读视图
          */
