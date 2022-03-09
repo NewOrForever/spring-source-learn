@@ -21,6 +21,15 @@
 <!--        <plugin interceptor="com.tuling.plugins.ExamplePlugin" ></plugin>-->
 <!--    </plugins>-->
 
+<!--    <objectFactory type="">-->
+<!--        <property name="" value=""/>-->
+<!--    </objectFactory>-->
+
+    <typeHandlers>
+        <typeHandler handler="" javaType="" jdbcType=""></typeHandler>
+        <package name=""/>
+    </typeHandlers>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
