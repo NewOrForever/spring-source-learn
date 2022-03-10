@@ -2,6 +2,11 @@ package org.example;
 
 import static org.junit.Assert.assertTrue;
 
+import com.mysql.jdbc.util.LRUCache;
+import org.apache.ibatis.cache.Cache;
+import org.apache.ibatis.cache.decorators.LruCache;
+import org.apache.ibatis.cache.decorators.SynchronizedCache;
+import org.apache.ibatis.cache.impl.PerpetualCache;
 import org.apache.ibatis.io.Resources;
 import org.junit.Test;
 
@@ -58,5 +63,13 @@ public class AppTest {
         map.put(null, "hahah");
     }
 
+    @Test
+    public void testMybatisCache() {
+        // mybatis二级缓存的设计模式：装饰 + 责任链
+        // 不断的向下委托，最终cache就包了很多层
+        Cache cache =  new PerpetualCache("id");
+        cache = new LruCache(cache);
+        cache = new SynchronizedCache(cache);
+    }
 
 }
