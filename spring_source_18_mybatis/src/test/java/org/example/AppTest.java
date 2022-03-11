@@ -3,6 +3,8 @@ package org.example;
 import static org.junit.Assert.assertTrue;
 
 import com.mysql.jdbc.util.LRUCache;
+import com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument;
+import com.sun.xml.internal.txw2.Document;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.decorators.LruCache;
 import org.apache.ibatis.cache.decorators.SynchronizedCache;
@@ -12,6 +14,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.sql.Timestamp;
 import java.util.*;
 

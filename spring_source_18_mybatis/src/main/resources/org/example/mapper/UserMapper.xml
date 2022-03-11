@@ -16,7 +16,6 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="create_time"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="update_time"/>
         <!--<collection property="" select=""-->
-
     </resultMap>
 
 
