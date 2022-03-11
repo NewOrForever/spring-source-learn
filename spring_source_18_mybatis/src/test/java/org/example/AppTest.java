@@ -75,4 +75,14 @@ public class AppTest {
         cache = new SynchronizedCache(cache);
     }
 
+    @Test
+    public void testOptionalNullable() {
+        Map variablesContext = new HashMap();
+        Map configurationVariables = new HashMap();
+        configurationVariables.put("a", "aa");
+
+        // 如果configurationVariables不为空，则执行variablesContext.putAll(configurationVariables)
+        Optional.ofNullable(configurationVariables).ifPresent(variablesContext::putAll);
+    }
+
 }

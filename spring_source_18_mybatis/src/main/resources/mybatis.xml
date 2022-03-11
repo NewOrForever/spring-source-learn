@@ -45,7 +45,7 @@
         </environment>
     </environments>
 
-
+<!--这里设置了数据库厂商的话UserMapper.xml里面 select|insert|update|delete 这些有databaseId属性的节点就需要设置匹配的值-->
     <databaseIdProvider type="DB_VENDOR">
         <property name="MySQL" value="mysql" />
         <property name="Oracle" value="oracle" />
