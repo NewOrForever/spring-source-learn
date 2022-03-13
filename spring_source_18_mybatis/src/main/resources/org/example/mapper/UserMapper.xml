@@ -35,6 +35,67 @@
         </where>
     </select>
 
+    <!--trim、where、set、foreach、if、choose、when、otherwise、bind-->
+    <select id="selectSqlNode" resultMap="userResult">
+        select <include refid="userAllFields" />
+        from users
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id > 0">
+                and id = #{id}
+            </if>
+            <if test="username != null">
+                and username = #{username}
+            </if>
+
+            <choose>
+                <when test="sex == 1">
+                    and sex = #{sex}
+                </when>
+                <when test="deleted == 0">
+                    and deleted = #{deleted}
+                </when>
+                <otherwise>
+                    and password = #{password}
+                </otherwise>
+            </choose>
+        </trim>
+
+    </select>
+
+    <update id="updateUserForeach" parameterType="map">
+        update users
+        <set>
+            <!--User对象封装进了Map，如果直接就是User的话前缀就不要了，这好像都是ognl表达式啊-->
+            username = #{user.username},
+            password = #{user.password}
+        </set>
+        <where>
+            id in
+            <foreach collection="ids" open="(" close=")" separator="," item="ids">
+                #{ids}
+            </foreach>
+        </where>
+
+    </update>
+
+
+
+
+    <!--
+        choose - when - otherwise  ==> 相当于java中的switch - case - default
+        trim时where和set的父类，可以替代他们使用
+        foreach
+         collection：用于迭代数组时array，集合时list，如果将元素封装进了Map，那么该值就是Map的key值
+            - 其实当传进来的参数类型时数组或时集合时，Mybatis自动会封装到Map，只不过默认了key值是array和list
+         open表示开始符号
+         close表示结束符合
+         separator表示元素间的分隔符
+         item表示迭代的数组，属性值可以任意，但提倡与方法的数组名相同
+         #{ids}表示数组中的每个元素值
+
+    -->
+
+
 
 
     <!--

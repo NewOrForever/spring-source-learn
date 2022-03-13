@@ -28,6 +28,7 @@
         <module>spring_source_17_mvc</module>
         <module>common_project</module>
         <module>spring_source_18_mybatis</module>
+        <module>spring_source_19_mybatis</module>
     </modules>
 
     <properties>

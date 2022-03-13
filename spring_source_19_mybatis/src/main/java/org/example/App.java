@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * mybatis源码学习
+ *  执行sql
  */
 public class App {
     public static void main(String[] args) throws IOException {
@@ -33,26 +34,8 @@ public class App {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             // 3.执行sql
-            // User user = sqlSession.selectOne("org.example.mapper.UserMapper.selectById", 1);
-            //System.out.println(user);
-
-//            User paramUser = new User();
-//            paramUser.setId(1);
-//            paramUser.setDeleted(0);
-//            paramUser.setUsername("1");
-//            paramUser.setPassword("1");
-//            paramUser.setSex(1);
-//            List<Object> userList = sqlSession.selectList("org.example.mapper.UserMapper.selectSqlNode", paramUser);
-//            userList.forEach(System.out::println);
-
-            User updateUser = new User();
-            updateUser.setUsername("2");
-            updateUser.setPassword("2");
-            Map<String, Object> map = new HashMap<>();
-            map.put("user", updateUser);
-            map.put("ids", new int[]{1, 2});
-            int r = sqlSession.update("org.example.mapper.UserMapper.updateUserForeach", map);
-            System.out.println(r);
+             User user = sqlSession.selectOne("org.example.mapper.UserMapper.selectById", 1);
+            System.out.println(user);
 
             sqlSession.commit();
         } catch (Exception e) {
