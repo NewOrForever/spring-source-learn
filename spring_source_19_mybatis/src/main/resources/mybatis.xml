@@ -17,9 +17,9 @@
 <!--        <package name=""/>-->
 <!--    </typeAliases>-->
 
-<!--    <plugins>-->
-<!--        <plugin interceptor="com.tuling.plugins.ExamplePlugin" ></plugin>-->
-<!--    </plugins>-->
+    <plugins>
+        <plugin interceptor="org.example.plugins.MyPlugin" ></plugin>
+    </plugins>
 
 <!--    <objectFactory type="">-->
 <!--        <property name="" value=""/>-->
