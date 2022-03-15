@@ -17,9 +17,10 @@
 <!--        <package name=""/>-->
 <!--    </typeAliases>-->
 
-<!--    <plugins>-->
-<!--        <plugin interceptor="org.example.plugins.MyPlugin" ></plugin>-->
-<!--    </plugins>-->
+    <plugins>
+        <plugin interceptor="org.example.plugins.MyPlugin" ></plugin>
+        <plugin interceptor="org.example.plugins.MySecondPlugin" ></plugin>
+    </plugins>
 
 <!--    <objectFactory type="">-->
 <!--        <property name="" value=""/>-->
