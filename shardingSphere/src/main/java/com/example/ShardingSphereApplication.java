@@ -1,15 +1,16 @@
 package com.example;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.example.mapper")
-public class ShardingApplication {
+public class ShardingSphereApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ShardingApplication.class, args);
+        SpringApplication.run(ShardingSphereApplication.class, args);
     }
 
 }
