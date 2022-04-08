@@ -25,11 +25,12 @@ public class MyHintDSShardingAlgorithm implements HintShardingAlgorithm<Integer>
         // 对SQL的零侵入分片方案。shardingValue是通过HintManager.
         // 比如我们要实现将 select * from t_user where user_id in {1,2,3,4,5,.....}; 按照in的第一个值，全部路由到course_1表中。
         // 注意他使用时有非常多的限制。
-//        String key = "m"+shardingValue.getValues().toArray()[0];
-//        if(availableTargetNames.contains(key)){
-//            return Arrays.asList(key);
-//        }
-//        throw new UnsupportedOperationException(" route "+key+" is not supported. please check your config");
-        return Arrays.asList("m1","m2");
+        // hintmanager中设置的：addDatabaseShardingValue
+        String key = "m"+shardingValue.getValues().toArray()[0];
+        if(availableTargetNames.contains(key)){
+            return Arrays.asList(key);
+        }
+        throw new UnsupportedOperationException(" route "+key+" is not supported. please check your config");
+//        return Arrays.asList("m1","m2");
     }
 }
