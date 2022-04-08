@@ -92,6 +92,10 @@ public class ShardingSphereJdbcTest {
     }
 
     //强制路由策略。脱离SQL自己指定分片策略。
+    /**
+     * 测试：HintManager去掉
+     * 测试：database策略使用hint
+     */
     @RequestMapping("/queryCourseByHint")
     public void queryCourseByHint(){
         //强制只查course_1表
