@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * ClassName:ShardingSphereJdbcTest
  * Package:com.example.controller
- * Description: 测试读写分离
+ * Description: 测试读写分离 - application03.properties
  *
  * @Date:2022/4/7 10:49
  * @Author:qs@1.com

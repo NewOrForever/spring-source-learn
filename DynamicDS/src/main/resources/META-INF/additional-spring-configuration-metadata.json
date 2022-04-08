@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource.read",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.example.config.DynamicDataSource",
+      "sourceMethod": "dataSourceRead()"
+    },
+    {
+      "name": "spring.datasource.write",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.example.config.DynamicDataSource",
+      "sourceMethod": "dataSourceWrite()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
