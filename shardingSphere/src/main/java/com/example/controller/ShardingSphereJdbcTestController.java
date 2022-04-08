@@ -2,8 +2,13 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.entity.Course;
+import com.example.entity.Dict;
+import com.example.entity.User;
 import com.example.mapper.CourseMapper;
+import com.example.mapper.DictMapper;
+import com.example.mapper.UserMapper;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/jdbc")
-public class ShardingSphereJdbcTest {
+public class ShardingSphereJdbcTestController {
 
     @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private DictMapper dictMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @RequestMapping("/addCourse")
     public void addCourse() {
@@ -101,8 +110,8 @@ public class ShardingSphereJdbcTest {
         //强制只查course_1表
         HintManager hintManager = HintManager.getInstance();
         //注意这两个属性，dataSourceBaseShardingValue用于强制分库
-        // 强制查m1数据源
-        hintManager.addDatabaseShardingValue("course","1");
+        // 强制查m2数据源
+        hintManager.addDatabaseShardingValue("course","2");
         // 强制查course_1表
         hintManager.addTableShardingValue("course","1");
 
@@ -111,5 +120,79 @@ public class ShardingSphereJdbcTest {
         //线程安全，所有用完要注意关闭。
         hintManager.close();
     }
+
+
+    // t_dict公共表测试
+    @RequestMapping("/addDict")
+    public void addDict() {
+        Dict dict = new Dict();
+        dict.setUstatus("1");
+        dict.setUvalue("正常");
+        dictMapper.insert(dict);
+
+        Dict dict2 = new Dict();
+        dict2.setUstatus("2");
+        dict2.setUvalue("异常");
+        dictMapper.insert(dict2);
+    }
+
+    @RequestMapping("/queryDict")
+    public void queryDict() {
+        QueryWrapper<Dict> wrapper = new QueryWrapper<Dict>();
+        wrapper.eq("ustatus", "1");
+        List<Dict> dicts = dictMapper.selectList(wrapper);
+        dicts.forEach(dict -> System.out.println(dict));
+    }
+    //公共表修改测试
+    @RequestMapping("/updateDict")
+    public void updateDict() {
+        Dict dict = new Dict();
+        dict.setUstatus("1");
+        dict.setUvalue("Normal");
+
+        UpdateWrapper<Dict> wrapper = new UpdateWrapper<Dict>();
+        wrapper.eq("ustatus", dict.getUstatus());
+        dictMapper.update(dict, wrapper);
+    }
+
+
+    @RequestMapping("/addUser")
+    public void addUser() {
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setUsername("user_"+i);
+            user.setUstatus(String.valueOf(i%2+1));
+            userMapper.insert(user);
+        }
+    }
+
+    @RequestMapping("/queryUser")
+    public void queryUser() {
+        List<User> users = userMapper.selectList(null);
+        users.forEach(System.out::println);
+    }
+
+
+    /**
+     * 绑定表查询
+     * 如果没配则会是一个笛卡尔积的形式查询
+     * 而在application04.properties中配置了绑定表后，t_user_1表将只和t_dict_1表联合，而不会和t_dict_2表联合。
+     */
+    @RequestMapping("/queryUserStatus")
+    public void queryUserStatus(){
+        List<User> users = userMapper.queryUserStatus();
+        users.forEach(System.out::println);
+    }
+
+    /**
+     * 这个联合查询的on后面的条件怎么用还是应该挺有点讲究的，暂时用的不多有点没搞清
+     */
+    @RequestMapping("/queryUserStatusById")
+    public void queryUserStatusById(){
+        List<User> users = userMapper.queryUserStatusById();
+        users.forEach(System.out::println);
+    }
+
+
 
 }
