@@ -12,7 +12,7 @@ spring:
       min-idle: 1
       max-active: 20
       test-on-borrow: true
-        driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
     write:
       url: jdbc:mysql://192.168.65.230:3306/testDB?serverTimezone=UTC
       username: root

@@ -3,13 +3,13 @@
     {
       "name": "spring.datasource.read",
       "type": "javax.sql.DataSource",
-      "sourceType": "com.example.config.DynamicDataSource",
+      "sourceType": "com.example.config.DynamicDataSourceConfig",
       "sourceMethod": "dataSourceRead()"
     },
     {
       "name": "spring.datasource.write",
       "type": "javax.sql.DataSource",
-      "sourceType": "com.example.config.DynamicDataSource",
+      "sourceType": "com.example.config.DynamicDataSourceConfig",
       "sourceMethod": "dataSourceWrite()"
     }
   ],
