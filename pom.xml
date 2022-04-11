@@ -30,6 +30,7 @@
         <module>spring_source_18_mybatis</module>
         <module>spring_source_19_mybatis</module>
         <module>redis-jedis</module>
+        <module>zookeeper_01</module>
     </modules>
 
     <properties>

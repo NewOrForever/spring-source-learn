@@ -1,10 +1,13 @@
 server:
-  address: localhost
   port: 9100
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    read:
+#    url: jdbc:mysql://192.168.65.227:3306/testDB?serverTimezone=UTC
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    datasource1:
       url: jdbc:mysql://192.168.65.227:3306/testDB?serverTimezone=UTC
       username: root
       password: root
@@ -13,7 +16,7 @@ spring:
       max-active: 20
       test-on-borrow: true
       driver-class-name: com.mysql.cj.jdbc.Driver
-    write:
+    datasource2:
       url: jdbc:mysql://192.168.65.230:3306/testDB?serverTimezone=UTC
       username: root
       password: root

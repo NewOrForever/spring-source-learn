@@ -11,14 +11,14 @@ import java.util.Map;
 @Component
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    private static ThreadLocal<String> name = new ThreadLocal<>();
+    public static ThreadLocal<String> name = new ThreadLocal<>();
     public static final String DATASOURCE_READ_LOOKUP_KEY = "R";
     public static final String DATASOURCE_WRITE_LOOKUP_KEY = "W";
 
     @Autowired
-    private DataSource dataSourceRead;
+    private DataSource dataSource1;
     @Autowired
-    private DataSource dataSourceWrite;
+    private DataSource dataSource2;
 
 
     @Override
@@ -30,11 +30,11 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     public void afterPropertiesSet() {
         // 指定所有数据源
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DATASOURCE_READ_LOOKUP_KEY, dataSourceRead);
-        targetDataSources.put(DATASOURCE_WRITE_LOOKUP_KEY, dataSourceWrite);
+        targetDataSources.put(DATASOURCE_READ_LOOKUP_KEY, dataSource1);
+        targetDataSources.put(DATASOURCE_WRITE_LOOKUP_KEY, dataSource2);
         // 指定默认的数据源
         super.setTargetDataSources(targetDataSources);
-        super.setDefaultTargetDataSource(dataSourceRead);
+        super.setDefaultTargetDataSource(dataSource1);
 
         super.afterPropertiesSet();
     }
