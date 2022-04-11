@@ -1,5 +1,8 @@
 package org.example;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.zookeeper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +22,11 @@ import java.util.concurrent.TimeUnit;
 public class ConfigCenter {
     private static final Logger logger =  LoggerFactory.getLogger(ConfigCenter.class);
 
-    private static final String CONNECT_STR = "192.168.65.227:2181";
+    private static final String CONNECT_STR = "192.168.0.110:2181";
     private static final Integer SESSION_TIMEOUT = 30 * 1000;
     private static CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
 
         // WatchedEvent state:SyncConnected type:None path:null
         ZooKeeper zooKeeper = new ZooKeeper(CONNECT_STR, SESSION_TIMEOUT, new Watcher() {
@@ -38,7 +41,35 @@ public class ConfigCenter {
 
         countDownLatch.await();
 
-        zooKeeper.create("/myconfig", new byte[], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT)
+        MyConfig myConfig = new MyConfig();
+        myConfig.setKey("mykey");
+        myConfig.setName("myname");
+        ObjectMapper objectMapper = new ObjectMapper();
+        byte[] bytes = objectMapper.writeValueAsBytes(myConfig);
+
+        String res = zooKeeper.create("/myconfig", bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+
+        Watcher watcher = new Watcher() {
+            @Override
+            public void process(WatchedEvent event) {
+                logger.info("{} 发生了数据变化", event.getPath());
+                // WatchedEvent state:SyncConnected type:NodeDataChanged path:/myconfig
+                if (event.getType() == Event.EventType.NodeDataChanged &&
+                event.getPath() != null && event.getPath().equals("/myconfig")) {
+                    try {
+                        byte[] data = zooKeeper.getData("/myconfig", this, null);
+                        logger.info("新的数据为：{}", new String(data));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        byte[] data = zooKeeper.getData("/myconfig", watcher, null);
+        MyConfig originMyConfig = objectMapper.readValue(data, MyConfig.class);
+
+        logger.info("原始数据为：{}", originMyConfig);
 
 
         TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
