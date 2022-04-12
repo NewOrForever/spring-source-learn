@@ -20,14 +20,14 @@ import java.util.concurrent.Executors;
  * @Date:2022/4/12 15:33
  * @Author:qs@1.com
  */
-public class CuratorBaseOperation extends CuratorStandaloneBase{
+public class CuratorBaseOperation extends CuratorStandaloneBase {
 
     private static final Logger log = LoggerFactory.getLogger(CuratorBaseOperation.class);
 
     private static final String CURATOR_NODE = "/curator_node";
     private static final String CURATOR_PARENT_NODE = "/curator_parent_node/sub_node";
 
-    // protection 模式，防止由于异常原因，导致僵尸节点
+    // protection 模式，防止由于异常原因，导致僵尸节点（幽灵节点）
     // 实际就是加个唯一标识前缀
     @Test
     public void testCreate() throws Exception {
@@ -105,7 +105,7 @@ public class CuratorBaseOperation extends CuratorStandaloneBase{
     @Test
     public void testThreadPool() throws Exception {
         CuratorFramework curatorFramework = getCuratorFramework();
-       curatorFramework.getData().inBackground(new BackgroundCallback() {
+        curatorFramework.getData().inBackground(new BackgroundCallback() {
             @Override
             public void processResult(CuratorFramework client, CuratorEvent event) throws Exception {
                 log.info("异步执行：{}", event);
