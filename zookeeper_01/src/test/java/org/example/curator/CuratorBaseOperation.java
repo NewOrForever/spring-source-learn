@@ -102,9 +102,17 @@ public class CuratorBaseOperation extends CuratorStandaloneBase{
         }
     }
 
+    /**
+     * 异步方式
+     *  - 自定义线程池
+     *  - CuratorEvent这个服务端返回进来的事件封装了很多数据
+     * @throws Exception
+     */
     @Test
     public void testThreadPool() throws Exception {
         CuratorFramework curatorFramework = getCuratorFramework();
+
+//        curatorFramework.setData().inBackground();
        curatorFramework.getData().inBackground(new BackgroundCallback() {
             @Override
             public void processResult(CuratorFramework client, CuratorEvent event) throws Exception {
