@@ -33,16 +33,16 @@ public abstract class StandaloneBase {
     @Before
     public void init() throws IOException, InterruptedException {
         // zookeeper的创建是异步的
-        zooKeeper = new ZooKeeper(CONNECT_STR, SESSION_TIMEOUT, watcher);
+        zooKeeper = new ZooKeeper(getConnectStr(), getSessionTimeout(), watcher);
         log.info("连接中。。。");
         countDownLatch.await();
     }
 
-    protected static String getConnectStr() {
+    protected String getConnectStr() {
         return CONNECT_STR;
     }
 
-    protected static Integer getSessionTimeout() {
+    protected Integer getSessionTimeout() {
         return SESSION_TIMEOUT;
     }
 

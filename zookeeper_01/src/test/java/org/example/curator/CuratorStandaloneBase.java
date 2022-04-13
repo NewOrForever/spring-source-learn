@@ -29,14 +29,14 @@ public abstract class CuratorStandaloneBase {
 
     private static final Integer SESSION_TIMEOUT_MS = 60 * 1000;
     private static final Integer CONNECTION_TIMEOUT_MS = 5000;
-    private static final String CONNECT_STR = "192.168.0.110";
+    private static final String CONNECT_STR = "192.168.65.227";
 
     private static CuratorFramework curatorFramework = null;
 
     @Before
     public void init() {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(5000, 30);
-        curatorFramework = CuratorFrameworkFactory.builder().connectString(CONNECT_STR)
+        curatorFramework = CuratorFrameworkFactory.builder().connectString(getConnectStr())
                 .retryPolicy(retryPolicy)                                                           // 重试策略
                 .sessionTimeoutMs(SESSION_TIMEOUT_MS)                        // 会话超时时间
                 .connectionTimeoutMs(CONNECTION_TIMEOUT_MS)         // 连接超时时间
@@ -80,5 +80,9 @@ public abstract class CuratorStandaloneBase {
 
     public static CuratorFramework getCuratorFramework() {
         return curatorFramework;
+    }
+
+    protected String getConnectStr() {
+        return CONNECT_STR;
     }
 }
