@@ -29,7 +29,7 @@ public abstract class CuratorStandaloneBase {
 
     private static final Integer SESSION_TIMEOUT_MS = 60 * 1000;
     private static final Integer CONNECTION_TIMEOUT_MS = 5000;
-    private static final String CONNECT_STR = "192.168.65.227";
+    private static final String CONNECT_STR = "192.168.0.110";
 
     private static CuratorFramework curatorFramework = null;
 
@@ -56,11 +56,15 @@ public abstract class CuratorStandaloneBase {
         curatorFramework.start();
     }
 
-    public void createIfNeed(String path) throws Exception {
-        Stat stat = curatorFramework.checkExists().forPath(path);
-        if (stat == null) {
-            String s = curatorFramework.create().forPath(path);
-            log.info("path {} created!", s);
+    public void createIfNeed(String path) {
+        try {
+            Stat stat = curatorFramework.checkExists().forPath(path);
+            if (stat == null) {
+                String s = curatorFramework.create().forPath(path);
+                log.info("path {} created!", s);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
