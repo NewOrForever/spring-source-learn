@@ -2,6 +2,7 @@ package org.example.client;
 
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.data.Stat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,18 +20,32 @@ import java.util.concurrent.TimeUnit;
 public class ClusterOperation extends ClusterBase{
     private static final Logger log = LoggerFactory.getLogger(ClusterOperation.class);
 
+    /**
+     * 测试重连
+     * 注意啊linux的端口要开啊
+     * @throws InterruptedException
+     */
     @Test
-    public void testReconnect() {
+    public void testReconnect() throws InterruptedException {
         ZooKeeper zooKeeper = getZooKeeper();
         while (true) {
             try {
-                byte[] data = zooKeeper.getData("/reconnect", false, null);
+                Stat stat = new Stat();
+                byte[] data = zooKeeper.getData("/reconnect", false, stat);
                 log.info("get data：{}", new String(data));
 
-                TimeUnit.SECONDS.sleep(15);
+                TimeUnit.SECONDS.sleep(5);
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info("开始重连。。。");
+
+                while (true) {
+                    log.info("========zookeeper status: {}", zooKeeper.getState().name());
+                    if (zooKeeper.getState().isConnected()) {
+                        break;
+                    }
+                    TimeUnit.SECONDS.sleep(3);
+                }
             }
         }
     }

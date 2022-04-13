@@ -10,7 +10,7 @@ package org.example.client;
  */
 public class ClusterBase extends StandaloneBase {
     private static final String CLUSTER_CONNECT_STR = "192.168.65.227:2181,192.168.65.227:2182,192.168.65.227:2183,192.168.65.227:2184";
-    private static final Integer CLUSTER_SESSION_TIMEOUT = 10 * 1000;
+    private static final Integer CLUSTER_SESSION_TIMEOUT = 60 * 1000;
 
     public Integer getSessionTimeout() {
         return CLUSTER_SESSION_TIMEOUT;
