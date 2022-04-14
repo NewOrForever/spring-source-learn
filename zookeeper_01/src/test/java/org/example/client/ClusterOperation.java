@@ -27,21 +27,23 @@ public class ClusterOperation extends ClusterBase{
      */
     @Test
     public void testReconnect() throws InterruptedException {
-        ZooKeeper zooKeeper = getZooKeeper();
+        // ZooKeeper zooKeeper = getZooKeeper();
         while (true) {
             try {
                 Stat stat = new Stat();
-                byte[] data = zooKeeper.getData("/reconnect", false, stat);
+                byte[] data = getZooKeeper().getData("/reconnect", false, stat);
                 log.info("get data：{}", new String(data));
 
-                TimeUnit.SECONDS.sleep(5);
+                // 这个等待时间开始设置的5s -> 太长，在sleep期间客户端已经完成了重连（服务端发送事件回来监听到然后发起重连）
+                // -> 1s能够进入到异常逻辑
+                TimeUnit.SECONDS.sleep(1);
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info("开始重连。。。");
 
                 while (true) {
-                    log.info("========zookeeper status: {}", zooKeeper.getState().name());
-                    if (zooKeeper.getState().isConnected()) {
+                    log.info("========zookeeper status: {}", getZooKeeper().getState().name());
+                    if (getZooKeeper().getState().isConnected()) {
                         break;
                     }
                     TimeUnit.SECONDS.sleep(3);

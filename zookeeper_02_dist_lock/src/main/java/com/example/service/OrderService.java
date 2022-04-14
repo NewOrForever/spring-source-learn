@@ -35,27 +35,28 @@ public class OrderService {
     @Transactional
     public void reduceStock(Integer pid) throws Exception {
 
-        // 创建订单减库存
         InterProcessMutex lock = new InterProcessMutex(curatorFramework, PRODUCT_LOCK_PREFIX + pid);
+        lock.acquire();
         try {
-            lock.acquire();
             Product product = productMapper.getProduct(pid);
+            int stock = product.getStock();
             // 模拟耗时业务
             //sleep(500);
+            if (stock > 0) {
+                // 创建订单减库存
+                int realStock = stock - 1;
+                productMapper.deductStock(pid);
 
-            if (product.getStock() <= 0) {
-                throw new RuntimeException("out of stock：" + product.getStock());
-            }
-            int i = productMapper.deductStock(pid);
-            if (i == 1) {
                 Order order = new Order();
                 order.setPid(pid);
                 order.setUserId(UUID.randomUUID().toString());
                 orderMapper.insert(order);
-                System.out.println("真实库存：" + (product.getStock() - 1));
+
+                System.out.println("扣减成功，剩余库存：" + realStock);
             } else {
-                throw new RuntimeException("deduct stock fail, retry.");
+                System.out.println("扣减失败，库存不足");
             }
+
         } catch (Exception e) {
             throw e;
         } finally {
