@@ -31,6 +31,7 @@
         <module>spring_source_19_mybatis</module>
         <module>redis-jedis</module>
         <module>zookeeper_01</module>
+        <module>RabbitMq-01-basic</module>
     </modules>
 
     <properties>

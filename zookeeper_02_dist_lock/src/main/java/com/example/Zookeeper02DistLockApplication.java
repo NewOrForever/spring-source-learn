@@ -23,7 +23,7 @@ public class Zookeeper02DistLockApplication {
     @Bean(initMethod = "start")
     public CuratorFramework curatorFramework() {
         ExponentialBackoffRetry retryPolicy = new ExponentialBackoffRetry(5000, 30);
-        CuratorFramework client = CuratorFrameworkFactory.builder().connectString("192.168.65.227:2181")
+        CuratorFramework client = CuratorFrameworkFactory.builder().connectString("192.168.0.110:2181")
                 .sessionTimeoutMs(60 * 1000)
                 .connectionTimeoutMs(5000)
                 .retryPolicy(retryPolicy)
