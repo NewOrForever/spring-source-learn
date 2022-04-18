@@ -8,7 +8,8 @@ import java.util.concurrent.TimeoutException;
 
 public class BaseMQ {
 
-    private static final String CONNECT_HOST = "192.168.0.110";
+//    private static final String CONNECT_HOST = "192.168.0.110";
+    private static final String CONNECT_HOST = "192.168.65.227";
     private static final Integer CONNECT_PORT = 5672;
     private static final String CONNECT_USER_NAME = "sq";
     private static final String CONNECT_PASSWORD = "123456";

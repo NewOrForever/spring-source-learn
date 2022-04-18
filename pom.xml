@@ -32,6 +32,8 @@
         <module>redis-jedis</module>
         <module>zookeeper_01</module>
         <module>RabbitMq-01-basic</module>
+        <module>RabbitMq-02-spring_producer</module>
+        <module>RabbitMq-02-spring_consumer</module>
     </modules>
 
     <properties>
