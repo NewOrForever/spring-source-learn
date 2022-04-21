@@ -1,7 +1,9 @@
 package org.example.provider;
 
+import org.example.framework.URL;
 import org.example.framework.protocol.HttpServer;
 import org.example.framework.register.LocalRegister;
+import org.example.framework.register.RemoteMapRegister;
 import org.example.provider.api.HelloService;
 import org.example.provider.impl.HelloServiceImpl;
 
@@ -22,12 +24,18 @@ public class Provider {
      *  3、启动tomcat
      */
     public static void main(String[] args) {
+        URL url = new URL();
+        url.setHostname("localhost");
+        url.setPost(8080);
+
+        // 远程注册服务
+        RemoteMapRegister.regist(HelloService.class.getName(), url);
 
         // 注册本地服务
         LocalRegister.regist(HelloService.class.getName(), HelloServiceImpl.class);
 
         HttpServer httpServer = new HttpServer();
-        httpServer.start("localhost", 8080);
+        httpServer.start(url.getHostname(), url.getPost());
     }
 
 }

@@ -1,8 +1,10 @@
 package org.example.framework.protocol;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.io.IOUtils;
 import org.example.framework.Invocation;
 import org.example.framework.register.LocalRegister;
+import sun.nio.ch.IOUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +36,9 @@ public class HttpServerHandler {
             Class implClass = LocalRegister.get(invocation.getInterfaceName());
             Method method = implClass.getMethod(invocation.getMethodName(), invocation.getParamTypes());
             String result = (String) method.invoke(implClass.newInstance(), invocation.getParams());
+
+            System.out.println("tomcat：" + result);
+            IOUtils.write(result, resp.getOutputStream());
 
         } catch (IOException | NoSuchMethodException e) {
             e.printStackTrace();

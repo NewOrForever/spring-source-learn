@@ -1,5 +1,7 @@
 package org.example.framework;
 
+import java.io.Serializable;
+
 /**
  * ClassName:Invocation
  * Package:org.example
@@ -8,7 +10,8 @@ package org.example.framework;
  * @Date:2022/4/21 15:42
  * @Author:qs@1.com
  */
-public class Invocation {
+public class Invocation implements Serializable {
+    private static final long serialVersionUID = 2079788073690381123L;
     private String interfaceName;
     private String methodName;
     private Class[] paramTypes;
