@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @Date:2022/4/18 15:00
  * @Author:qs@1.com
  */
-@RabbitListener
+
 public class SpringQueueListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
