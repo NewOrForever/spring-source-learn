@@ -1,5 +1,6 @@
 package org.example.provider.impl;
 
+import org.apache.dubbo.config.annotation.Service;
 import org.example.provider.api.HelloService;
 
 /**

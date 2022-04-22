@@ -27,10 +27,12 @@ public class HttpServerHandler {
 
         try {
             // 接收到消费端传递过来的数据
-            Invocation invocation = JSON.parseObject(req.getInputStream(), Invocation.class);
+            // Invocation invocation = JSON.parseObject(req.getInputStream(), Invocation.class);
 
-//            ObjectInputStream objectInputStream = new ObjectInputStream(req.getInputStream());
-//            Invocation o = (Invocation) objectInputStream.readObject();
+            // jdk11之前用
+            // HttpClient发送数据的时候使用ObjectOutputStream，所以这里也需要用ObjectInputStream来读取
+            ObjectInputStream objectInputStream = new ObjectInputStream(req.getInputStream());
+            Invocation invocation = (Invocation) objectInputStream.readObject();
 
             // 从本地注册中心拿接口的实现类
             Class implClass = LocalRegister.get(invocation.getInterfaceName());
@@ -47,6 +49,8 @@ public class HttpServerHandler {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

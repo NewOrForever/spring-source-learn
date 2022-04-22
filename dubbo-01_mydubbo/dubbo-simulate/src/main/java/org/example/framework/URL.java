@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class URL implements Serializable {
     private static final long serialVersionUID = 3841286229072600529L;
     private String hostname;
-    private Integer post;
+    private Integer port;
 
     public String getHostname() {
         return hostname;
@@ -15,11 +15,11 @@ public class URL implements Serializable {
         this.hostname = hostname;
     }
 
-    public Integer getPost() {
-        return post;
+    public Integer getPort() {
+        return port;
     }
 
-    public void setPost(Integer post) {
-        this.post = post;
+    public void setPort(Integer port) {
+        this.port = port;
     }
 }
