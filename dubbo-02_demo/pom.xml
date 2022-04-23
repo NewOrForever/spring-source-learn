@@ -17,6 +17,7 @@
     <modules>
         <module>provider</module>
         <module>interface</module>
+        <module>consumer</module>
     </modules>
 
     <dependencyManagement>
