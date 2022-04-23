@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * ClassName:DemoService
  * Package:com.example
@@ -11,4 +13,10 @@ package com.example;
 public interface DemoService {
 
     String sayHello(String name);
+
+    // 异步调用方法
+    default CompletableFuture<String> sayHelloAsync(String name) {
+        return null;
+    };
+
 }
