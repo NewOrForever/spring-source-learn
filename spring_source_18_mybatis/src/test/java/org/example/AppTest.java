@@ -15,13 +15,14 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.*;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class AppTest implements BridgeInterface<BridgeUser> {
     @Test
     public void testDate() {
         System.out.println(new Date());
@@ -70,7 +71,7 @@ public class AppTest {
     public void testMybatisCache() {
         // mybatis二级缓存的设计模式：装饰 + 责任链
         // 不断的向下委托，最终cache就包了很多层
-        Cache cache =  new PerpetualCache("id");
+        Cache cache = new PerpetualCache("id");
         cache = new LruCache(cache);
         cache = new SynchronizedCache(cache);
     }
@@ -84,5 +85,29 @@ public class AppTest {
         // 如果configurationVariables不为空，则执行variablesContext.putAll(configurationVariables)
         Optional.ofNullable(configurationVariables).ifPresent(variablesContext::putAll);
     }
+
+    @Test
+    public void testBridgeMethod() throws NoSuchMethodException {
+        // int a = 0;
+        // assert a == 1;
+        for (Method method : AppTest.class.getDeclaredMethods()) {
+            if ("findBridge".equals(method.getName())) {
+                System.out.println(method.isBridge());
+            }
+        }
+
+    }
+
+    @Override
+    public void findBridge(BridgeUser user) {
+
+    }
+}
+
+interface BridgeInterface<T> {
+    void findBridge(T t);
+}
+
+class BridgeUser {
 
 }

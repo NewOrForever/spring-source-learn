@@ -48,7 +48,6 @@ public class TestProxyFactory {
 //
 //        User proxyUser = (User) proxyFactory.getProxy();
 //        proxyUser.execute();
-
         /*********************如何设置不同方法不同的代理逻辑***********************/
         ProxyFactory proxyFactory = new ProxyFactory();
         proxyFactory.setTarget(target);

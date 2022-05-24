@@ -51,7 +51,7 @@ public class App {
 //        AnnotatedBeanDefinitionReader beanDefinitionReader = new AnnotatedBeanDefinitionReader(context);
 //        beanDefinitionReader.registerBean(UserService.class);
 //        System.out.println(context.getBean("userService"));
-
+//
 //        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(context);
 //        xmlBeanDefinitionReader.loadBeanDefinitions("classpath:spring.xml");
 //        System.out.println(context.getBean("userService"));
@@ -142,20 +142,24 @@ public class App {
         // typeconverter
 //        SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
 //        simpleTypeConverter.registerCustomEditor(User.class, new StringToUserPropertyEditor());
-////        simpleTypeConverter.setConversionService(conversionService);
+//
+//        DefaultConversionService conversionService = new DefaultConversionService();
+//        conversionService.addConverter(new StringToPersonConverter());
+//        simpleTypeConverter.setConversionService(conversionService);
 //        System.out.println(simpleTypeConverter.convertIfNecessary("simpletypeconverter", User.class));
-
+//        System.out.println(simpleTypeConverter.convertIfNecessary("100", Person.class));
+//
 //        UserService userService = (UserService) context.getBean("userService");
 //        userService.typeConvert();
 
         /***************************比较器****************************/
 //        A a = new A();
 //        B b = new B();
-//        // 注解
-////        AnnotationAwareOrderComparator annotationAwareOrderComparator = new AnnotationAwareOrderComparator();
-////        System.out.println(annotationAwareOrderComparator.compare(a, b));
-//
-//        // 实现Ordered接口
+        // 注解
+//        AnnotationAwareOrderComparator annotationAwareOrderComparator = new AnnotationAwareOrderComparator();
+//        System.out.println(annotationAwareOrderComparator.compare(a, b));
+
+        // 实现Ordered接口
 //        OrderComparator orderComparator = new OrderComparator();
 //        System.out.println(orderComparator.compare(a, b));
 //
@@ -171,23 +175,23 @@ public class App {
         //context.getBean("userService");
 
         /*************************元数据读取器*****************************/
-//        SimpleMetadataReaderFactory simpleMetadataReaderFactory = new SimpleMetadataReaderFactory();
-//        // 获取某个类的元数据读取器
-//        // 在new SimpleMetadataReader的时候会去创建SimpleAnnotationMetadataReadingVisitor来读取class文件的信息
-//        MetadataReader metadataReader = simpleMetadataReaderFactory.getMetadataReader(UserService.class.getName());
-//        // ClassMetaData
-//        ClassMetadata classMetadata = metadataReader.getClassMetadata();
-//        System.out.println(classMetadata.getClassName());
-//        System.out.println(classMetadata.getInterfaceNames()[0]);
-//        System.out.println(classMetadata.getMemberClassNames()[0]);
-//        System.out.println(classMetadata.getEnclosingClassName());
-//
-//        // AnnotationMetaData
-//        AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
-//        System.out.println(annotationMetadata.getAnnotationTypes());
-//        System.out.println(annotationMetadata.hasAnnotation(Indexed.class.getName()));
-//        System.out.println(annotationMetadata.hasMetaAnnotation(Indexed.class.getName()));
-//        System.out.println(annotationMetadata.getMetaAnnotationTypes(Component.class.getName()));
+        SimpleMetadataReaderFactory simpleMetadataReaderFactory = new SimpleMetadataReaderFactory();
+        // 获取某个类的元数据读取器
+        // 在new SimpleMetadataReader的时候会去创建SimpleAnnotationMetadataReadingVisitor来读取class文件的信息
+        MetadataReader metadataReader = simpleMetadataReaderFactory.getMetadataReader(UserService.class.getName());
+        // ClassMetaData
+        ClassMetadata classMetadata = metadataReader.getClassMetadata();
+        System.out.println(classMetadata.getClassName());
+        System.out.println(classMetadata.getInterfaceNames()[0]);
+        System.out.println(classMetadata.getMemberClassNames()[0]);
+        System.out.println(classMetadata.getEnclosingClassName());
+
+        // AnnotationMetaData
+        AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
+        System.out.println(annotationMetadata.getAnnotationTypes());
+        System.out.println(annotationMetadata.hasAnnotation(Indexed.class.getName()));
+        System.out.println(annotationMetadata.hasMetaAnnotation(Indexed.class.getName()));
+        System.out.println(annotationMetadata.getMetaAnnotationTypes(Component.class.getName()));
 
         /*****************************FactoryBean创建的bean不会经历bean完整的生命周期，而是经历初始化后的生命周期，为的还是aop吧**********************************/
         // spring是会将FactoryBean当成普通bean来处理的，singletonObjects中是有factoryBean的单例bean存在的

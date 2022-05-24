@@ -23,6 +23,13 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/test/**"/>-->
+<!--            <ref></ref>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
  
  

@@ -24,7 +24,7 @@
     </sql>
 
 <!--${}测试-->
-    <select id="selectById" databaseId="mysql" resultMap="userResult"  >
+    <select id="selectById" databaseId="mysql" resultMap="userResult" >
         select
         <include refid="userAllFields" />
         from users

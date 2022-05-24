@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>core-demo</module>
+        <module>spring_source_01</module>
         <module>MySpring</module>
         <module>spring_source_03</module>
         <module>spring_source_04</module>

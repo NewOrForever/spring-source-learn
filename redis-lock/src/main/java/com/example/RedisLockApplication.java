@@ -17,7 +17,7 @@ public class RedisLockApplication {
     @Bean
     public Redisson redisson() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://192.168.65.227:6379").setDatabase(0);
+        config.useSingleServer().setAddress("redis://192.168.0.109:6379").setDatabase(0);
         return (Redisson) Redisson.create(config);
     }
 

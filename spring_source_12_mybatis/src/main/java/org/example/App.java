@@ -30,6 +30,15 @@ public class App
          *  先用xxx（单例池找及beanDefinition找）去类型匹配getObjectType，匹配到则是候选beanName
          *  没匹配到则再用&xxx去直接匹配类型，true则是候选beanName
          *
+         * spring整合mybatis的流程：
+         *  spring容器启动 -> ConfigurationClassPostProcessor去加载配置类 -> @MapperScan注解加载Import导入的类 -> 执行方法注册一个MapperScanConfigurer的bean
+         *  -> 该类是一个BeanDefinitionRegistryPostProcessor，执行bean注册方法 -> 自定义个spring扫描器的子类，重写几个方法，将@MapperScan指定的包下的Mapper接口注册
+         *  为bean -> 遍历这些bean，将beanClass改为MapperFactoryBean，beandefinition指定构造方法参数值，autowiremode改为bytype以便set自动注入
+         *  -> getBean非懒加载单例bean -> UserService属性注入UserMapper -> 遍历beandefinitonNames，当前beanName是factoryBean，先用xxx去getObjectType匹配则getBean调用getObject
+         *  -> MapperFactoryBean.getObject() -> Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy)得到UserMapper的代理类
+         *  -> UserMapper.selectOne() -> MappeFactory代理逻辑 -> SqlSessionTemplate.selectOne() -> sqlSessionProxy.selectOne() -> 代理逻辑
+         *  -> DefaultSqlSession.selectOne() -> ...
+         *
          */
 
         // 这段代码其实就是构造一个beanName为userMapper的FactoryBean，UseService的UserMapper属性填充的时候UserMapper和FactoryBean的getObjectType
@@ -42,8 +51,10 @@ public class App
 
         context.refresh();
 
+        //context.getBean("sqlSessionFactory");
+
         UserService userService = (UserService) context.getBean("userService");
-        // 同一个事务下能公用sqlSession，不在同一个事务下sqlSession是不同的
+        // 同一个事务下能公用sqlSession (执行完一次sql引用次数--)，不在同一个事务下sqlSession是不同的（每次执行完sql都会commit）
         userService.test();
 //        userService.testTran();
 
@@ -56,7 +67,7 @@ public class App
          *      TransactionSynchronizationManager.isSynchronizationActive()，不开启事务就不会去缓存sqlsession，每次都要去重新创建
          *
          *  不开启spring事务但是想要一级缓存有效？
-         *  - @Bean  sqlSession sqlSessionFactory().openSession();
+         *  - @Bean  sqlSession sqlSessionFactory().openSession()
          *  - UserService中@Autowired SqlSession
          *  - sqlSession.selectOne("org.example.mapper.UserMapper.selectById")
          *

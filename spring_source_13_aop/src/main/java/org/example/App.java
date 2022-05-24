@@ -23,7 +23,7 @@ public class App
          *   1. spring复制了一个版本的cglib代码进来
          *      - cglib（基于父子类）使用
          *          - 需要设置superClass
-         *          - methodProxy.invoke  /  method.invok   /   methodProxy.invokeSuper(o, objects)
+         *          - methodProxy.invoke  /  method.invoke   /   methodProxy.invokeSuper(o, objects)
          *          - o是代理对象
          *          - 不同方法对应不同代理逻辑
          *              1. Callback设置多个 - NoOp.Instance啥都不做的拦截器

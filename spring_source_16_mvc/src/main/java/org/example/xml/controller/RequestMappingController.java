@@ -26,6 +26,7 @@ import java.io.IOException;
  * @Date:2022/2/25 10:41
  * @Author:qs@1.com
  */
+
 @Controller
 @RequestMapping("/request")
 public class RequestMappingController implements ApplicationContextAware {

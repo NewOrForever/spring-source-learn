@@ -24,7 +24,7 @@ public class MyAspectSetIntercetorBeanFactoryPostProcessor implements BeanFactor
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         if (beanFactory.containsBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME)) {
             BeanDefinition beanDefinition = beanFactory.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
-            if (AnnotationAwareAspectJAutoProxyCreator.class.getName() == beanDefinition.getBeanClassName()) {
+            if (AnnotationAwareAspectJAutoProxyCreator.class.getName().equals(beanDefinition.getBeanClassName())) {
                 // 开启了aop
                 // 设置interceptorNames（advice的beanName）
                 beanDefinition.getPropertyValues().addPropertyValue("interceptorNames", "myBeforeAdvice");

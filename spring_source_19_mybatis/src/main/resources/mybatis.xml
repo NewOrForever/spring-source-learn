@@ -18,7 +18,9 @@
 <!--    </typeAliases>-->
 
     <plugins>
-        <plugin interceptor="org.example.plugins.MyPlugin" ></plugin>
+        <plugin interceptor="org.example.plugins.MyPlugin" >
+            <property name="" value=""/>
+        </plugin>
         <plugin interceptor="org.example.plugins.MySecondPlugin" ></plugin>
     </plugins>
 

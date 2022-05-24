@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -42,12 +43,13 @@ public class IndexController implements ApplicationContextAware {
 
     /**
      * 分布式场景下使用jvm的自带的锁synchronized
+     * - 很明显这把锁没法锁分布式场景，因为这个是jvm级别的，现在有两个jvm
      */
     @RequestMapping("/jvm_deduct_stock")
     public void jvmDeductStock() {
 //        String lockKey = "lock:product:10086";
         synchronized (this) {
-            int stock = Integer.parseInt(stringRedisTemplate.opsForValue().get("stock"));
+            int stock = Integer.parseInt(Objects.requireNonNull(stringRedisTemplate.opsForValue().get("stock")));
             if (stock > 0) {
                 int realStock = stock - 1;
                 stringRedisTemplate.opsForValue().set("stock", realStock + "");
@@ -139,6 +141,10 @@ public class IndexController implements ApplicationContextAware {
     @GetMapping("/test")
     public String test() {
         System.out.println(request.getRequestURL());
+        System.out.println(request.getRequestURI());
+        System.out.println(request.getContextPath());
+        System.out.println(request.getServletPath());
+        System.out.println(request.isAsyncSupported());
         return "001";
     }
 

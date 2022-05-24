@@ -1,5 +1,7 @@
 package org.example;
 
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -30,10 +32,10 @@ public class App {
          * 测试checkCandidate方法内部的isCompatible
          * 这里符合扫描了两次相同的class文件，所以是可以兼容的，返回false，表示不需要再去注册beandefinition了
          */
-//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-//        context.scan("org.example");
-//        context.scan("org.example");
-//        context.refresh();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("org.example");
+        context.scan("org.example");
+        context.refresh();
 
         /**
          * spring.components文件来存放类型全名和注解全名的key-value，在初始化AnnotationConfigApplicationContext的时候会加载到
@@ -66,13 +68,12 @@ public class App {
         */
 
         // 设置父容器：context.setparent，isFactoryBean
-        AnnotationConfigApplicationContext parentContext = new AnnotationConfigApplicationContext(ParentAppConfig.class);
-
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-//        context.register(UserService.class);
-        context.setParent(parentContext);
-        context.refresh();
-        context.getBean("userService");
+//        AnnotationConfigApplicationContext parentContext = new AnnotationConfigApplicationContext(ParentAppConfig.class);
+//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+////        context.register(UserService.class);
+//        context.setParent(parentContext);
+//        context.refresh();
+//        context.getBean("userService");
 
         // getObjectForBeanInstance
 

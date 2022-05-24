@@ -7,6 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ConfigurationClassPostProcessor;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
@@ -33,7 +34,7 @@ public class App
          *      getPhase()：该方法用于编组，返回相同值的是同一组，如果没有该方法，会把所有的LifeCycle分到一组去
          *      最后是遍历分组来foreach执行dostart方法
          *
-         * messagesource：自己设置的beanName要messgeSource?
+         * messagesource：自己设置的beanName要messgeSource? - 源码是这么写的，不是这个beanName的话会给messageSource一个默认的对象DelegatingMessageSource
          *
          *  事件发布及事件监听
          *      ApplicationListenerDetector：fresh时处理自己定义的监听器，检查某个bean是不是applicationcontextListener
@@ -43,7 +44,7 @@ public class App
          *      @EventListener: EventListenerMethodProcessor  -》 DefaultEventListenerFactory
          *          - 核心处理是EventListenerMethodProcessor的afterSingletonsInstantiated（实现SmartInitializingSingleton，所有非懒加载单例bean
          *          加载完后执行）
-         *          - 会将@EventListener注解的方法适配成ApplicationListenerMethodAdapter
+         *          - 会将@EventListener注解的方法适配成ApplicationListenerMethodAdapter（和销毁时候的适配应该是差不多的逻辑）
          *
          *
          *

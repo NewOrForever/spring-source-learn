@@ -1,5 +1,3 @@
-
-
 rootconfig implements ServletContextAware
 @EnableWebMvc
 加载拦截器啊啥的WebMvcConfigurer

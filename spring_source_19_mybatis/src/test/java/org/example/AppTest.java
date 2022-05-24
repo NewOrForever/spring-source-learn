@@ -2,16 +2,25 @@ package org.example;
 
 import static org.junit.Assert.assertTrue;
 
+import org.apache.ibatis.cache.Cache;
+import org.apache.ibatis.cache.impl.PerpetualCache;
 import org.junit.Test;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+
+    @Test
+    public void testMytransaction() {
+        MyTransactionCacheManager myTransactionCacheManager = new MyTransactionCacheManager();
+        Cache cache = new PerpetualCache("test");
+        MyTransactionCache transactionalCache = myTransactionCacheManager.getTransactionalCache(cache);
+        System.out.print(transactionalCache);
+    }
+
     /**
      * Rigorous Test :-)
      */
@@ -47,5 +56,20 @@ public class AppTest {
     }
 
     public interface D {
+    }
+}
+class MyTransactionCacheManager{
+    private final Map<Cache, MyTransactionCache> map = new HashMap<>();
+
+    public MyTransactionCache getTransactionalCache(Cache cache) {
+        return map.computeIfAbsent(cache, MyTransactionCache::new);
+    }
+
+}
+class MyTransactionCache{
+    private Cache delegate;
+
+    public MyTransactionCache(Cache cache) {
+        this.delegate = cache;
     }
 }

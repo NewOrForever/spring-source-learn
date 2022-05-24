@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @Date:2022/1/6 15:45
  * @Author:qs@1.com
  */
-
+//@Component
 public class UserService {//implements UserServiceInterface<OrderService> {
 
 //    @Autowired(required = false)
@@ -62,9 +62,9 @@ public class UserService {//implements UserServiceInterface<OrderService> {
 //    }
 
     public void test() {
-        System.out.println(this.orderService123);
-        System.out.println(this.user);
-        System.out.println(this.order);
+        System.out.println("---------->" + this.orderService123);
+        System.out.println("---------->" +this.user);
+        System.out.println("---------->" +this.order);
 //        System.out.println(this.orderName);
     }
 

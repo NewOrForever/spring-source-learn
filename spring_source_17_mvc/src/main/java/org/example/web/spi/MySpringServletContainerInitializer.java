@@ -3,9 +3,7 @@ package org.example.web.spi;
 import org.springframework.web.SpringServletContainerInitializer;
 import org.springframework.web.WebApplicationInitializer;
 
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.HandlesTypes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,5 +30,12 @@ public class MySpringServletContainerInitializer extends SpringServletContainerI
                 resp.getWriter().write("spi-servlet -> doGet");
             }
         }).addMapping("/");
+
+//        servletContext.addFilter("myFilter", new Filter() {
+//            @Override
+//            public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+//
+//            }
+//        }).addMappingForUrlPatterns(null, false, "/*"); // FilterMap
     }
 }

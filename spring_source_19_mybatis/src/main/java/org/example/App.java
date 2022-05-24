@@ -29,7 +29,6 @@ public class App {
         String resources = "mybatis.xml";
         Reader reader = Resources.getResourceAsReader(resources);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-
         // 2.拿到要给sqlsession
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {

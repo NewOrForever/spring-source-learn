@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -46,6 +47,8 @@ public class AppConfig {
      * MapperFactoryBean的父类SqlSessionDaoSupport有setSqlSessionFactory方法
      * 创建MapperFactoryBean这个bean的时候set注入，参数传入set方法并执行set方法创建一个sqlSessionTemplate（这里的sqlSessionProxy这个jdk代理对象挺重要的）
      * InvocationHandler方法拦截器中首先会去拿sqlsession
+     * sql执行流程：
+     * SqlSessionTemplate.selectOne() -> sqlSessionProxy.selectOne() -> 代理逻辑 -> DefaultSqlSession.selectOne()
      *
      * MapperProxy的sqlsession是sqlsessiontemplate
      * @return
@@ -63,7 +66,7 @@ public class AppConfig {
     /**
      * 直接注册MapperScannerConfigurer这个bean的方式来代理@MapperScan注解
      * @Configuration使用时，因为MapperScannerConfigurer是一个BeanDefinitionRegistryPostProcessor，它getBean
-     * 比enhance configuration早的缘故（我猜测的啊）
+     * 比enhance configuration早的缘故（我猜测的啊）-> 所以要使用static方法
      */
 //    @Bean
 //    public static MapperScannerConfigurer mapperScannerConfigurer() {
@@ -109,6 +112,9 @@ public class AppConfig {
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
+        // 不配置这个不会解析mybatis.xml这个配置文件
+        // checkDaoConfig会去configuration.addMapper(this.mapperInterface)方法 -> 添加到MapperRegistry
+        // sqlSessionFactoryBean.setConfigLocation(new InputStreamResource(Resources.getResourceAsStream("mybatis.xml")));
         return sqlSessionFactoryBean.getObject();
     }
 

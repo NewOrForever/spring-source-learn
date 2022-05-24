@@ -28,7 +28,6 @@ import java.util.Set;
  */
 public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
     /**
-     * 
      * @param importingClassMetadata - AppConfig这个配置类
      * @param registry
      * @param importBeanNameGenerator

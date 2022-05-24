@@ -30,7 +30,7 @@ public class App
          * 	- 该配置类有@Import注解，执行processImports处理导入的类
          * 		- 实现了ImportSelector
          * 			- 有没有实现	DeferredImportSelector，是则添加到paser的deferredImportSelectorHandler属性中，推迟到每一批配置类解析完成后再去执行
-         * 			- 否则直接执行selectImports()方法，返回的类再去执行processImports方法
+         * 			- 否则直接实现selectImports()方法，返回的类再去执行processImports方法
          * 		- 实现ImportBeanDefinitionRegistrar，添加到当前配置类的importBeanDefinitionRegistrars属性中，在loadbeandefiniton中去执行
          * 		- 普通类则会当成配置类来进行解析
          * 	- 该配置类有@ImportResource注解，将xml文件resource添加到当前配置类的importedResources属性中，在loadbeandefinition中解析xml

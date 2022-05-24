@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
  * @Author:qs@1.com
  */
 public interface OrderMapper {
+
     @Select("SELECT username FROM users WHERE id=1")
     String selectById();
 }
