@@ -164,6 +164,7 @@ public class ProductService {
                 // 空缓存
                 redisUtil.expire(productCacheKey, generateEmptyCacheTimeOut(), TimeUnit.SECONDS);
                 // 和前端约定一下这种原始对象数据不显示
+                // return null的话有点问题 -> 还会去查DB
                 return new Product();
             }
 

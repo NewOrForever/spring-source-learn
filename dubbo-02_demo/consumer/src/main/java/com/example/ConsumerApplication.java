@@ -8,13 +8,15 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class ConsumerApplication {
 
-    @Reference(version = "default", group = "default")
+//    @Reference(version = "default", group = "default")
+//    @Reference(version = "generic")
+    @Reference(version = "tag")
     private DemoService demoService;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ConsumerApplication.class, args);
-        DemoService demoService = context.getBean(DemoService.class);
-        System.out.println(demoService.sayHello("sq"));
+//        DemoService demoService = context.getBean(DemoService.class);
+//        System.out.println(demoService.sayHello("sq"));
     }
 
 }

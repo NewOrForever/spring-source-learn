@@ -18,6 +18,8 @@ public class RedisLockApplication {
     public Redisson redisson() {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://192.168.65.227:6379").setDatabase(0);
+        // Redisson的构造方法是protected
+        // createConnectionManager  -> id是一个UUID
         return (Redisson) Redisson.create(config);
     }
 

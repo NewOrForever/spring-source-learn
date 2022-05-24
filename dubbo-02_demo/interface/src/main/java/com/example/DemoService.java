@@ -17,6 +17,10 @@ public interface DemoService {
     // 异步调用方法
     default CompletableFuture<String> sayHelloAsync(String name) {
         return null;
-    };
+    }
+
+    default String sayHello(String name, String key, CallbackListener callback) {
+        return null;
+    }
 
 }

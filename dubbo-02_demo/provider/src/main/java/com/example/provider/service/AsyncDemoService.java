@@ -7,7 +7,7 @@ import org.apache.dubbo.rpc.RpcContext;
 
 import java.util.concurrent.CompletableFuture;
 
-@Service(version = "async")
+//@Service(version = "async")
 public class AsyncDemoService implements DemoService {
     @Override
     public String sayHello(String name) {
@@ -20,8 +20,10 @@ public class AsyncDemoService implements DemoService {
     public CompletableFuture<String> sayHelloAsync(String name) {
         System.out.println("执行了异步服务" + name);
 
+        RpcContext context = RpcContext.getContext();
+        System.out.println(context.getAttachment("remote.application"));
         return CompletableFuture.supplyAsync(() -> {
-            return sayHello(name);
+            return "---------------------> async response from provider.";
         });
     }
 }

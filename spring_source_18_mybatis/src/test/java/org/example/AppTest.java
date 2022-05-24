@@ -85,4 +85,12 @@ public class AppTest {
         Optional.ofNullable(configurationVariables).ifPresent(variablesContext::putAll);
     }
 
+    @Test
+    public void testMapPut() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("a", "first");
+        map.put("a", "second"); // 结论: 覆盖旧值
+        System.out.println(map);
+    }
+
 }

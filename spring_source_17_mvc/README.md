@@ -10,7 +10,7 @@ rootconfig implements ServletContextAware
 
 
 
-## spring mvc 注解方式启动原理
+## spring mvc javaconfig方式启动原理
 ### java的SPI机制（Service Provider interface - 服务提供者接口）
 maven引入spring_source_16_mvc的包，spring_source_17_mvc的resources目录下META-INF/services目录下建一个接口全名的文件，并在文件中
 写上接口实现类
