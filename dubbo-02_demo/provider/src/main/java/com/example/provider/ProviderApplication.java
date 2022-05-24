@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableDubbo
+@EnableDubbo(scanBasePackages = {"com.example.provider.service"})
 public class ProviderApplication {
 
     public static void main(String[] args) {

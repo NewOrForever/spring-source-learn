@@ -7,16 +7,19 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.SmartView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * ClassName:RequestMappingController
@@ -38,8 +41,20 @@ public class RequestMappingController implements ApplicationContextAware {
         System.out.println("this is requestMappingController");
 
         ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setView(new SmartView() {
+//            @Override
+//            public boolean isRedirectView() {
+//                return false;
+//            }
+//
+//            @Override
+//            public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//            }
+//        });
         modelAndView.setViewName("a");
         modelAndView.addObject("source", "requestMappingController");
+//        modelAndView.setStatus(HttpStatus.OK);
         
         return modelAndView;
     }

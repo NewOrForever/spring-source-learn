@@ -5,7 +5,9 @@
 
 <!--    <cache-ref namespace=""/>-->
 
-    <cache></cache>
+    <cache>
+        <property name="" value=""/>
+    </cache>
     <!-- Mybatis 是如何将 sql 执行结果封装为目标对象并返回的？都有哪些映射形式？-->
     <resultMap id="userResult" type="org.example.entity.User">
         <id column="id" jdbcType="INTEGER" property="id"/>
@@ -24,7 +26,7 @@
     </sql>
 
 <!--${}测试-->
-    <select id="selectById" databaseId="mysql" resultMap="userResult" >
+    <select id="selectById" databaseId="mysql" resultMap="userResult"  >
         select
         <include refid="userAllFields" />
         from users
@@ -78,6 +80,11 @@
 
     </update>
 
+<insert id="" >
+    <selectKey keyProperty="" keyColumn="" >
+
+    </selectKey>
+</insert>
 
 
 

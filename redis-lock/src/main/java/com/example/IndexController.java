@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -101,6 +102,7 @@ public class IndexController implements ApplicationContextAware {
         }*/
 
         // 获取锁对象
+        // 初始化对象看一下哦，好多初始化数据都在里面
         RLock redissonLock = redisson.getLock(lockKey);
         // 加分布式锁
         redissonLock.lock();
@@ -125,6 +127,7 @@ public class IndexController implements ApplicationContextAware {
             }*/
 
             // 释放分布式锁
+            // 对于重入锁（一个线程加个几次锁？-> 需要unlock几次）
             redissonLock.unlock();
         }
 

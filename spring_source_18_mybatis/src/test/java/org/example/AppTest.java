@@ -71,7 +71,7 @@ public class AppTest implements BridgeInterface<BridgeUser> {
     public void testMybatisCache() {
         // mybatis二级缓存的设计模式：装饰 + 责任链
         // 不断的向下委托，最终cache就包了很多层
-        Cache cache = new PerpetualCache("id");
+        Cache cache =  new PerpetualCache("id");
         cache = new LruCache(cache);
         cache = new SynchronizedCache(cache);
     }
