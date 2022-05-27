@@ -32,6 +32,11 @@ public class CuratorBaseOperation extends CuratorStandaloneBase{
     @Test
     public void testCreate() throws Exception {
         CuratorFramework curatorFramework = getCuratorFramework();
+
+        if (curatorFramework.checkExists().forPath(CURATOR_NODE) != null) {
+            curatorFramework.delete().guaranteed().deletingChildrenIfNeeded().forPath(CURATOR_NODE);
+        }
+
         String s = curatorFramework.create()
                 //.withProtection()
                 .withMode(CreateMode.PERSISTENT)

@@ -35,6 +35,7 @@ public abstract class CuratorStandaloneBase {
 
     @Before
     public void init() {
+        // 每重试一组次数，重试之间的睡眠时间增加
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(5000, 30);
         curatorFramework = CuratorFrameworkFactory.builder().connectString(getConnectStr())
                 .retryPolicy(retryPolicy)                                                           // 重试策略
@@ -53,6 +54,7 @@ public abstract class CuratorStandaloneBase {
         });
 
         log.info("连接中。。。");
+        // 这个start不要忘记写了哦，不然启动不了的哦
         curatorFramework.start();
     }
 

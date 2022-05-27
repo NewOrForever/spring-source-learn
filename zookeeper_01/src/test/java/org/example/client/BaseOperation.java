@@ -21,6 +21,8 @@ public class BaseOperation extends StandaloneBase{
     @Test
     public void testCreate() throws InterruptedException, KeeperException {
         ZooKeeper zooKeeper = getZooKeeper();
+        // path - 数据 - 权限 - node类型
+        // 字节数据
         String res = zooKeeper.create(TEST_NODE, "test".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         log.info("create：{}", res);
     }
@@ -101,6 +103,7 @@ public class BaseOperation extends StandaloneBase{
     @Test
     public void testAsync() {
         ZooKeeper zooKeeper = getZooKeeper();
+
         // 异步执行，走回调方法
         zooKeeper.getData(TEST_NODE, false, (rc, path, ctx, data,stat) -> {
             Thread thread = Thread.currentThread();
