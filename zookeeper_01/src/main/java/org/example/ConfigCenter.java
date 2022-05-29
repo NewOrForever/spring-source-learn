@@ -2,7 +2,9 @@ package org.example;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import org.apache.zookeeper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,9 +70,8 @@ public class ConfigCenter {
 
         byte[] data = zooKeeper.getData("/myconfig", watcher, null);
         MyConfig originMyConfig = objectMapper.readValue(data, MyConfig.class);
-
         logger.info("原始数据为：{}", originMyConfig);
-
+//        JsonNode jsonNode = objectMapper.readTree(data);jsonNode.get("list").get(0).get("fieldName")
 
         TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
     }

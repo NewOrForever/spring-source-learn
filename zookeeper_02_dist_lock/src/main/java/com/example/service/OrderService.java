@@ -6,6 +6,7 @@ import com.example.mapper.OrderMapper;
 import com.example.mapper.ProductMapper;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
+import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,10 @@ public class OrderService {
 
     @Transactional
     public void reduceStock(Integer pid) throws Exception {
+
+        InterProcessReadWriteLock readWriteLock = new InterProcessReadWriteLock(curatorFramework, PRODUCT_LOCK_PREFIX + pid);
+        InterProcessMutex readLock = readWriteLock.readLock();
+        readLock.acquire();
 
         InterProcessMutex lock = new InterProcessMutex(curatorFramework, PRODUCT_LOCK_PREFIX + pid);
         lock.acquire();

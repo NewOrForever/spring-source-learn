@@ -53,8 +53,8 @@ public class CuratorClusterBaseOperation extends CuratorClusterBase {
     public static void main(String[] args) throws Exception {
         RetryPolicy retryPolicy=new ExponentialBackoffRetry( 5*1000, 10 );
 
-//        String connectStr = "192.168.0.110:2181,192.168.0.110:2182,192.168.0.110:2183,192.168.0.110:2184";
-        String connectStr = "192.168.65.227:2181,192.168.65.227:2182,192.168.65.227:2183,192.168.65.227:2184";
+        String connectStr = "192.168.0.110:2181,192.168.0.110:2182,192.168.0.110:2183,192.168.0.110:2184";
+//        String connectStr = "192.168.65.227:2181,192.168.65.227:2182,192.168.65.227:2183,192.168.65.227:2184";
         CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(connectStr, retryPolicy);
         curatorFramework.start();
 

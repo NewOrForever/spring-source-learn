@@ -29,7 +29,7 @@ public abstract class CuratorStandaloneBase {
 
     private static final Integer SESSION_TIMEOUT_MS = 60 * 1000;
     private static final Integer CONNECTION_TIMEOUT_MS = 5000;
-    private static final String CONNECT_STR = "192.168.65.227";
+    private static final String CONNECT_STR = "192.168.0.110";
 
     private static CuratorFramework curatorFramework = null;
 
