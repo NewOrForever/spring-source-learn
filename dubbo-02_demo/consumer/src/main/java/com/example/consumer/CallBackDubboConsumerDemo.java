@@ -24,7 +24,7 @@ public class CallBackDubboConsumerDemo {
         demoService.sayHello("哈哈", "d1", new CallbackListenerImpl());
         demoService.sayHello("哈哈", "d2", new CallbackListenerImpl());
         demoService.sayHello("哈哈", "d3", new CallbackListenerImpl());
-        demoService.sayHello("哈哈", "d4", new CallbackListenerImpl());
+        //demoService.sayHello("哈哈", "d4", new CallbackListenerImpl());
 
         /**
          * callbacks这个参数理解的测试

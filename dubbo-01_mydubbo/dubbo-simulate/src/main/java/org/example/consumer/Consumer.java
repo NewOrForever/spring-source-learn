@@ -13,6 +13,7 @@ import org.example.provider.api.HelloService;
  */
 public class Consumer {
     public static void main(String[] args) {
+        // jdk动态代理代理的是接口
         HelloService helloService = ProxyFactory.getProxy(HelloService.class);
         String res = helloService.sayHello("sq");
         System.out.println(res);

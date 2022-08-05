@@ -17,6 +17,7 @@ public class MockDubboConsumerDemo {
      * 测试本地伪装（通常用于服务降级）
      */
 
+    // parameters = {"sayHello.mock", "force:return aaaaa"}
     @Reference(version = "timeout", group = "timeout", timeout = 3000, mock = "force:return RpcException")
     private DemoService demoService;
 
