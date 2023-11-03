@@ -22,7 +22,7 @@ public class MyComplexDsShardingAlgorithm implements ComplexKeysShardingAlgorith
         //实现按照 Between 进行范围分片。
         //例如 select * from course where cid in (1,3,5) and userid Between 200 and 300;
 
-
+        // 为啥分片列的值是集合 -> in的情况下不就是多值么
         Collection<Long> cidCol = shardingValue.getColumnNameAndShardingValuesMap().get("cid");
         Range<Long> uageRange = shardingValue.getColumnNameAndRangeValuesMap().get("user_id");
 

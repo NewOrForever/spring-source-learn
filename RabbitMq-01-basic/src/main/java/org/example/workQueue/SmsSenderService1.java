@@ -23,6 +23,7 @@ public class SmsSenderService1 extends BaseMQ {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 System.out.println("SMSSender1-短信发送成功: ================> " + new String(body));
 
+                // 使用不同的sleep来模拟机器的好坏
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {

@@ -31,7 +31,7 @@ public class Consumer extends BaseMQ {
 
         //创建一个消息消费者
         //第一个参数：队列名
-        //第二个参数代表是否自动确认收到消息，false代表手动编程来确认消息，这是MQ的推荐做法
+        //第二个参数代表是否自动确认收到消息，false代表手动编程来确认消息，这是MQ的推荐做法 - 这样可以针对一些问题做出处理
         //第三个参数要传入DefaultConsumer的实现类
         channel.basicConsume(MyConstant.HELLOWORLD_QUEUE, false, new Receiver(channel));
 
@@ -56,6 +56,7 @@ class Receiver extends DefaultConsumer{
     @Override
     public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
         System.out.println("消费者接受到的消息：" + new String(body));
+        System.out.println("consumerTag =====> " + consumerTag);
 
         System.out.println("消息的tagId：" + envelope.getDeliveryTag());
         // false只确认签收当前的消息，设置为true时则代表签收该消费者所有未签收的消息

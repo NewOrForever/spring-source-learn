@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -31,9 +32,9 @@ public class ShardingSphereJdbcTestController {
 
     @Autowired
     private CourseMapper courseMapper;
-    @Autowired
+    @Resource
     private DictMapper dictMapper;
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @RequestMapping("/addCourse")

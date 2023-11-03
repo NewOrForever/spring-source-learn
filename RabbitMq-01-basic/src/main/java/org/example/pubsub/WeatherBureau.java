@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * 发布订阅模式
- * 气象站发布气象信息，门户网站接受
+ * 气象站发布气象信息，门户网站接收
  */
 public class WeatherBureau extends BaseMQ {
     public static void main(String[] args) throws IOException, TimeoutException {

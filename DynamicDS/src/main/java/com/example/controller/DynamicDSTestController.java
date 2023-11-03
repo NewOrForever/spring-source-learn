@@ -5,10 +5,12 @@ import com.example.entity.Course;
 import com.example.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +40,11 @@ public class DynamicDSTestController {
          * threadlocal和jdbctemplate操作可以封装到DynamicDataSource中
          *  - jdbctemplate注入（配置类中先@Bean给个默认的datasource）
          *  - 搞个方法设置threadlocal和jdbctemplate的datasource
+         *
+         * @see AbstractRoutingDataSource#determineCurrentLookupKey()
+         * @see DynamicDataSource#determineCurrentLookupKey()
+         * @see org.springframework.jdbc.datasource.DataSourceUtils#getConnection(DataSource)#doGetConnection#fetchConnection
+         * - 这里获取数据库连接的时候有个扩展determineCurrentLookupKey
          */
 
         // 读
