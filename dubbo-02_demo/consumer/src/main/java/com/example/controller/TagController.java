@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/tag")
 public class TagController {
+    // 在ConsumerApplication中已经引入@Reference引入了
     @Autowired
     private DemoService demoService;
 

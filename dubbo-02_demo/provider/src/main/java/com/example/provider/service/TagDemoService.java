@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @Author:qs@1.com
  */
 
-@Service(version = "tag")
+//@Service(version = "tag")
 public class TagDemoService implements DemoService {
     @Override
     public String sayHello(String name) {

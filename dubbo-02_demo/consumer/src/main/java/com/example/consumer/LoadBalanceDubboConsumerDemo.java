@@ -11,6 +11,8 @@ public class LoadBalanceDubboConsumerDemo {
 
     /**
      * 负载均衡
+     * leastactive：最少活跃调用数，在消费端进行统计，消费者会缓存提供者的信息active
+     * 为啥要在消费端统计？我猜想：如果在提供者端统计的话，每次消费者端都要请求到provider去拿active从而来判断出要去请求哪台机器，网络io开销较大
      */
 
     @Reference(version = "default", group = "default", loadbalance = "consistenthash")

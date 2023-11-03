@@ -17,7 +17,8 @@ import javax.ws.rs.Produces;
  * @Date:2022/4/25 9:07
  * @Author:qs@1.com
  */
-//@Service(version = "rest", protocol = "p2")
+// 注意者p2协议的端口号啊，请求的时候要拿这个port
+@Service(version = "rest", protocol = "p2")
 @Path("rest")
 public class RestDemoService implements DemoService {
 

@@ -41,7 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  */
 //@Service(version = "callback", methods = {
-//        @Method(name = "sayHello", arguments = {@Argument(index = 2, callback = true)})}, callbacks = 3)
+//      @Method(name = "sayHello", arguments = {@Argument(index = 2, callback = true)})}, callbacks = 3)
 public class CallBackDemoService implements DemoService {
     private final Map<String, CallbackListener> listeners = new ConcurrentHashMap<String, CallbackListener>();
 

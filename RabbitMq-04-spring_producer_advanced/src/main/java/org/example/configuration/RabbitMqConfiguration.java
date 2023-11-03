@@ -52,7 +52,7 @@ public class RabbitMqConfiguration {
         // 开启消息的confirm模式
         factory.setPublisherConfirms(true);
         // 开启消息退回模式 - 交换机正常接收到了消息但找不到可路由的队列
-        // mandatory若为true，则交换机会回退到producer
+        // mandatory若为true，则交换机会回退到producer，false则丢弃消息
         factory.setPublisherReturns(true);
 
         return factory;

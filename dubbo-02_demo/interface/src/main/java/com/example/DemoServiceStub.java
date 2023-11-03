@@ -17,6 +17,7 @@ public class DemoServiceStub implements DemoService {
     private final DemoService demoService;
 
     // 构造函数传入真正的远程代理对象
+    // 构造方法注入
     public DemoServiceStub(DemoService demoService) {
         this.demoService = demoService;
     }
