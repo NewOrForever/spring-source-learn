@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
  *  - 注意：这是producer和broker之间的消息投递情况，和消费者是否接收/确认消息无关
  *  - Confirm表示生产者将消息投递到broker时产生的状态
  *      - ack：broker已经将消息接收
- *      -nack：broker拒收消息，可能的原因有很多：队列已满、io异常、限流。。。
+ *      - nack：broker拒收消息，可能的原因有很多：队列已满、io异常、限流。。。
  *  - Return：代表消息被broker正常接收（ack），但broker没有对应的队列进行投递时产生状态，消息退回给生产者
  */
 public class WeatherBureau extends BaseMQ {

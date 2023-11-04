@@ -9,8 +9,8 @@ package org.example.curator;
  * @Author:qs@1.com
  */
 public class CuratorClusterBase extends CuratorStandaloneBase{
-    private static final String CLUSTER_CONNECT_STR = "192.168.65.227:2181,192.168.65.227:2182,192.168.65.227:2183,192.168.65.227:2184";
-   // private static final String CLUSTER_CONNECT_STR = "192.168.0.110:2181,192.168.0.110:2182,192.168.0.110:2183,192.168.0.110:2184";
+//    private static final String CLUSTER_CONNECT_STR = "192.168.65.227:2181,192.168.65.227:2182,192.168.65.227:2183,192.168.65.227:2184";
+    private static final String CLUSTER_CONNECT_STR = "192.168.0.110:2181,192.168.0.110:2182,192.168.0.110:2183,192.168.0.110:2184";
 
     protected String getConnectStr() {
         return CLUSTER_CONNECT_STR;

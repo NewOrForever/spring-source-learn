@@ -49,6 +49,8 @@ public class CuratorBaseOperation extends CuratorStandaloneBase{
     public void testCreateWithParent() {
         CuratorFramework curatorFramework = getCuratorFramework();
         try {
+            // createParentsIfNeeded实际上就是给这个属性赋值为true
+            // 在抛父节点不存在的异常时可以操作
             String s = curatorFramework.create().creatingParentsIfNeeded().forPath(CURATOR_PARENT_NODE, "parent-sub".getBytes());
             log.info("递归创建：{}", s);
         } catch (Exception e) {
@@ -90,6 +92,7 @@ public class CuratorBaseOperation extends CuratorStandaloneBase{
     public void testDelete() {
         CuratorFramework curatorFramework = getCuratorFramework();
         try {
+            // deletingChildrenIfNeeded属性为true，抛有字节点的异常时进行操作
             curatorFramework.delete().guaranteed().deletingChildrenIfNeeded().forPath("/curator_parent_node");
         } catch (Exception e) {
             e.printStackTrace();
