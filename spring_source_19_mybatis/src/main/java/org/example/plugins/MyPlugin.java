@@ -33,7 +33,6 @@ public class MyPlugin implements Interceptor {
         System.out.println("MyPlugin：代理");
         Object[] args = invocation.getArgs();
         MappedStatement ms = (MappedStatement) args[0];
-
         return invocation.proceed();
     }
 }

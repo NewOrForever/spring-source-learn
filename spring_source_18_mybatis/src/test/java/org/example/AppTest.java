@@ -3,8 +3,8 @@ package org.example;
 import static org.junit.Assert.assertTrue;
 
 import com.mysql.jdbc.util.LRUCache;
-import com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument;
-import com.sun.xml.internal.txw2.Document;
+//import com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument;
+//import com.sun.xml.internal.txw2.Document;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.decorators.LruCache;
 import org.apache.ibatis.cache.decorators.SynchronizedCache;

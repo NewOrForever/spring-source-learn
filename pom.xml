@@ -35,6 +35,7 @@
         <module>RabbitMq-02-spring_producer</module>
         <module>RabbitMq-02-spring_consumer</module>
         <module>dubbo-01_mydubbo</module>
+        <module>testweb</module>
     </modules>
 
     <properties>

@@ -33,8 +33,14 @@ public class App {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             // 3.执行sql
-             User user = sqlSession.selectOne("org.example.mapper.UserMapper.selectById", 1);
-            System.out.println(user);
+//             User user = sqlSession.selectOne("org.example.mapper.UserMapper.selectById", 1);
+//            System.out.println(user);
+
+            // 测试泛型失效
+            List<Map<String, String>> list = sqlSession.selectList("org.example.mapper.UserMapper.selectAll");
+
+
+            List<MyUser> list2 = sqlSession.selectList("org.example.mapper.UserMapper.selectUsers");
 
             sqlSession.commit();
         } catch (Exception e) {
@@ -44,5 +50,26 @@ public class App {
             sqlSession.close();
         }
 
+    }
+
+    public static class MyUser {
+        private String id;
+        private String name;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

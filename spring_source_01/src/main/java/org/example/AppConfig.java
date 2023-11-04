@@ -1,5 +1,6 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +29,10 @@ public class AppConfig {
 
     // compnent 和 bean同时去注入一个对象，名称也相同，这时bean会覆盖掉compnent（beandefinitionmap）
     // 当然可以配置不能覆盖，但是设置为不能覆盖后这样是会报错的
-//    @Bean
-//    public OrderService orderService() {
-//        return new OrderService();
-//    }
+    @Bean
+    public OrderService orderService() {
+        return new OrderService();
+    }
 
     @Bean
     public UserService userService() {
