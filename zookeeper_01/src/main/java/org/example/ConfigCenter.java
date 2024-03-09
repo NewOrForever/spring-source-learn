@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class ConfigCenter {
     private static final Logger logger =  LoggerFactory.getLogger(ConfigCenter.class);
 
-    private static final String CONNECT_STR = "192.168.0.110:2181";
+    private static final String CONNECT_STR = "192.168.50.65:2181";
     private static final Integer SESSION_TIMEOUT = 30 * 1000;
     private static CountDownLatch countDownLatch = new CountDownLatch(1);
 

@@ -36,7 +36,6 @@ public class UserService {
 //        System.out.println(jdbcTemplate.queryForObject("select username from users", String.class));
         jdbcTemplate.execute("insert into users(id,username,password,sex,deleted) values(1,'1','1','1','0')");
 
-
         try {
             userService.a();
         } catch (Exception e) {
