@@ -24,6 +24,10 @@ public class App
          *      2. 注册：context.registerShurtdownHook();
          *          获取容器后就去注册，这种方式下是将销毁操作交给jvm，进程正常结束后销毁，但是强制结束进程不会触发（比如debug时直接终止）
          *      3. 实际两种方式执行的最终的代码时一致的，都是去执行AbstractApplicationContext.doClose()
+         *          org.springframework.context.support.AbstractApplicationContext#doClose -> org.springframework.context.support.AbstractApplicationContext#destroyBeans
+         *          -> org.springframework.beans.factory.support.DefaultListableBeanFactory#destroySingletons -> org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#destroySingletons
+         *          -> org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#destroySingleton -> org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#destroyBean（这里会去销毁依赖该 bean 的其他 bean以及该 bean 依赖的其他 bean）
+         *          -> org.springframework.beans.factory.support.DisposableBeanAdapter#destroy
          *      4. 销毁bean的时候先从需要销毁的缓存中剔除当前beanName，再强转成DisposableBean（实际是包装类DisposableBeanAdapter），最后会去
          *      调用销毁方法
          *      (DisposableBean) this.disposableBeans.remove(beanName);
